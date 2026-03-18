@@ -845,6 +845,12 @@ footer {
     justify-content: center;
 }
 
+.auth-modal.open {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .auth-modal-content {
     background: #fff;
     padding: 50px;
