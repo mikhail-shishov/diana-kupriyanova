@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STUL - Каталог серий</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .logo_img {
+            height: 70px;
+            width: auto;
+            opacity: 0.9;
+        }
+        .catalog-hero {
+            padding: 50px 30px;
+            text-align: center;
+            background: #fff;
+        }
+        
+        .catalog-hero h1 {
+            font-size: 42px;
+            margin-bottom: 15px;
+        }
+        
+        .breadcrumbs {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .breadcrumbs a {
+            color: #666;
+            transition: color 0.3s;
+        }
+        
+        .breadcrumbs a:hover {
+            color: #000;
+        }
+        
+        .series-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+            max-width: 1300px;
+            margin: 40px auto;
+            padding: 0 30px 50px;
+        }
+        
+        .series-card {
+            background: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+        }
+        
+        .series-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.08);
+        }
+        
+        .series-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .series-card h3 {
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
+        
+        .series-card p {
+            color: #666;
+            margin-bottom: 12px;
+            font-size: 14px;
+            line-height: 1.5;
+            min-height: 40px;
+        }
+        
+        .series-badge {
+            display: inline-block;
+            background: #e9eae5;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+        }
+        
+        @media (max-width: 1200px) {
+            .series-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .series-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .series-grid {
+                grid-template-columns: 1fr;
+                padding: 0 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="header-left">
+                <a href="index.html" class="logo-link">
+                    <img class="logo_img" src="img/header_img/stud_logo.png" alt="STUL">
+                </a>
+                <nav class="menu">
+                    <a href="catalog.html">Каталог</a>
+                    <a href="delivery.html">Доставка</a>
+                    <a href="about.html">О нас</a>
+                </nav>
+            </div>
+            <div class="header-right">
+                <div class="search-container">
+                    <input type="text" class="search-input" placeholder="Поиск">
+                    <img src="img/header_img/search_logo.png" alt="Поиск" class="search-icon">
+                </div>
+                <div class="icon-group">
+                    <img src="img/header_img/user_logo.png" alt="Войти" class="header-icon user-icon">
+                    <img src="img/header_img/favorite_logo.png" alt="Избранное" class="header-icon favorites-icon">
+                    <div class="basket-icon" id="cartIcon">
+                        <img src="img/header_img/backet_logo.png" alt="Корзина">
+                        <span class="cart-count" id="cartCount">0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="catalog-hero">
+            <h1>Каталог серий</h1>
+            <div class="breadcrumbs">
+                <a href="index.html">Главная</a> / <span>Каталог</span>
+            </div>
+        </div>
+
+        <div class="series-grid">
+            <div class="series-card" onclick="location.href='series.html?name=Blossom'">
+                <img src="img/series_img/blossom-series.jpg" alt="Серия Blossom">
+                <h3>Blossom</h3>
+                <p>Элегантная садовая мебель с плетением Rope</p>
+                <span class="series-badge">6 моделей</span>
+            </div>
+            <div class="series-card" onclick="location.href='series.html?name=Madrid'">
+                <img src="img/series_img/madrid-series.jpg" alt="Серия Madrid">
+                <h3>Madrid</h3>
+                <p>Классический испанский стиль</p>
+                <span class="series-badge">4 модели</span>
+            </div>
+            <div class="series-card" onclick="location.href='series.html?name=Hampton'">
+                <img src="img/series_img/hampton-series.jpeg" alt="Серия Hampton">
+                <h3>Hampton</h3>
+                <p>Американская классика</p>
+                <span class="series-badge">5 моделей</span>
+            </div>
+            <div class="series-card" onclick="location.href='series.html?name=Charlton'">
+                <img src="img/series_img/charlton-series.webp" alt="Серия Charlton">
+                <h3>Charlton</h3>
+                <p>Английский аристократизм</p>
+                <span class="series-badge">3 модели</span>
+            </div>
+            <div class="series-card" onclick="location.href='series.html?name=Symphony'">
+                <img src="img/series_img/symphony-series.jpg" alt="Серия Symphony">
+                <h3>Symphony</h3>
+                <p>Современная элегантность</p>
+                <span class="series-badge">4 модели</span>
+            </div>
+            <div class="series-card" onclick="location.href='series.html?name=Cozy'">
+                <img src="img/series_img/cozy-series.jpg" alt="Серия Cozy">
+                <h3>Cozy</h3>
+                <p>Максимальный комфорт</p>
+                <span class="series-badge">3 модели</span>
+            </div>
+            <div class="series-card" onclick="location.href='series.html?name=Hudson'">
+                <img src="img/series_img/hudson-series.jpg" alt="Серия Hudson">
+                <h3>Hudson</h3>
+                <p>Индустриальный шик</p>
+                <span class="series-badge">4 модели</span>
+            </div>
+            <div class="series-card" onclick="location.href='series.html?name=Aurora'">
+                <img src="img/series_img/aurora-series.jpg" alt="Серия Aurora">
+                <h3>Aurora</h3>
+                <p>Северное сияние в вашем саду</p>
+                <span class="series-badge">3 модели</span>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-top">
+                <div class="footer-logo">
+                    <img src="img/header_img/stud_logo.png" alt="STUL">
+                    <p>Мебель из дерева и натуральных материалов. Современный минимализм с душой.</p>
+                    <div class="social-links">
+                        <a href="#"><img src="img/footer_img/instagram.svg" alt="Instagram"></a>
+                        <a href="#"><img src="img/footer_img/facebook.svg" alt="Facebook"></a>
+                        <a href="#"><img src="img/footer_img/pinterest.svg" alt="Pinterest"></a>
+                        <a href="#"><img src="img/footer_img/youtube.svg" alt="YouTube"></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Каталог</h4>
+                    <ul>
+                        <li><a href="series.html?name=Blossom">Blossom</a></li>
+                        <li><a href="series.html?name=Madrid">Madrid</a></li>
+                        <li><a href="series.html?name=Hampton">Hampton</a></li>
+                        <li><a href="series.html?name=Charlton">Charlton</a></li>
+                        <li><a href="series.html?name=Symphony">Symphony</a></li>
+                        <li><a href="series.html?name=Cozy">Cozy</a></li>
+                        <li><a href="series.html?name=Hudson">Hudson</a></li>
+                        <li><a href="series.html?name=Aurora">Aurora</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Информация</h4>
+                    <ul>
+                        <li><a href="about.html">О нас</a></li>
+                        <li><a href="delivery.html">Доставка и оплата</a></li>
+                        <li><a href="#">Гарантия</a></li>
+                        <li><a href="#">Блог</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Контакты</h4>
+                    <div class="footer-contact">
+                        <p><img src="img/footer_img/phone.svg" alt="Телефон"> +7 (915) 401-57-54</p>
+                        <p><img src="img/footer_img/email.svg" alt="Email"> info@stul.ru</p>
+                        <p><img src="img/footer_img/location.svg" alt="Адрес"> Москва, ул. Большая Дмитровка, 20</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2024 STUL. Все права защищены</p>
+                <div class="footer-bottom-links">
+                    <a href="#">Политика конфиденциальности</a>
+                    <a href="#">Пользовательское соглашение</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Корзина</h3>
+            <span class="close-cart" onclick="closeCart()">&times;</span>
+        </div>
+        <div class="cart-items" id="cartItems"></div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Итого:</span>
+                <span id="cartTotal">0 ₽</span>
+            </div>
+            <button class="checkout-btn" onclick="checkout()">Оформить заказ</button>
+        </div>
+    </div>
+
+    <div class="auth-modal" id="authModal">
+        <div class="auth-modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>Авторизация / Регистрация</h2>
+            <form id="authForm">
+                <input type="text" placeholder="Имя" required>
+                <input type="tel" placeholder="Телефон" required>
+                <input type="email" placeholder="Email" required>
+                <input type="password" placeholder="Пароль" required>
+                <div class="form-buttons">
+                    <button type="submit" class="register-btn">Зарегистрироваться</button>
+                    <button type="button" class="login-btn">Войти</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

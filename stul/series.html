@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STUL - Серия</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .series-header {
+            padding: 120px 40px 40px;
+            text-align: center;
+            background: #f5f5f5;
+        }
+        
+        .series-header h1 {
+            font-size: 48px;
+            font-weight: 400;
+            margin-bottom: 15px;
+        }
+        
+        .series-header p {
+            font-size: 16px;
+            color: #777;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+        
+        .breadcrumbs {
+            margin-bottom: 20px;
+            color: #999;
+            font-size: 13px;
+        }
+        
+        .breadcrumbs a {
+            color: #999;
+            transition: color 0.3s;
+        }
+        
+        .breadcrumbs a:hover {
+            color: #000;
+        }
+        
+        .products-grid {
+            max-width: 1300px;
+            margin: 60px auto 80px;
+            padding: 0 40px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        
+        .product-card {
+            background: #fff;
+            padding: 20px;
+            cursor: pointer;
+            transition: transform 0.3s;
+            border: 1px solid rgba(0,0,0,0.03);
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            background: #fafafa;
+        }
+        
+        .product-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: contain;
+            margin-bottom: 15px;
+            background: #f8f8f8;
+            padding: 20px;
+        }
+        
+        .product-card h3 {
+            font-size: 18px;
+            font-weight: 400;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+        
+        .product-card .price {
+            font-size: 16px;
+            color: #666;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        
+        .product-card .badge {
+            display: inline-block;
+            background: #e9eae5;
+            padding: 4px 12px;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 10px;
+        }
+        
+        @media (max-width: 992px) {
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .products-grid {
+                grid-template-columns: 1fr;
+                padding: 0 20px;
+            }
+            
+            .series-header h1 {
+                font-size: 36px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="header-left">
+                <a href="index.html" class="logo-link">
+                    <img class="logo_img" src="img/header_img/stud_logo.png" alt="STUL">
+                </a>
+                <nav class="menu">
+                    <a href="catalog.html">Каталог</a>
+                    <a href="delivery.html">Доставка</a>
+                    <a href="about.html">О нас</a>
+                </nav>
+            </div>
+            <div class="header-right">
+                <div class="search-container">
+                    <input type="text" class="search-input" placeholder="Поиск">
+                    <img src="img/header_img/search_logo.png" alt="Поиск" class="search-icon">
+                </div>
+                <div class="icon-group">
+                    <img src="img/header_img/user_logo.png" alt="Войти" class="header-icon user-icon">
+                    <img src="img/header_img/favorite_logo.png" alt="Избранное" class="header-icon favorites-icon">
+                    <div class="basket-icon" id="cartIcon">
+                        <img src="img/header_img/backet_logo.png" alt="Корзина">
+                        <span class="cart-count" id="cartCount">0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="series-header">
+            <div class="breadcrumbs">
+                <a href="index.html">Главная</a> / <a href="catalog.html">Каталог</a> / <span id="series-name">Серия</span>
+            </div>
+            <h1 id="series-title">Blossom</h1>
+            <p id="series-description">Элегантная садовая мебель с плетением Rope</p>
+        </div>
+
+        <div class="products-grid" id="products-container">
+            <!-- Товары будут загружаться через JavaScript -->
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-top">
+                <div class="footer-logo">
+                    <img src="img/header_img/stud_logo.png" alt="STUL">
+                    <p>Мебель из дерева и натуральных материалов. Современный минимализм с душой.</p>
+                    <div class="social-links">
+                        <a href="#"><img src="img/footer_img/instagram.svg" alt="Instagram"></a>
+                        <a href="#"><img src="img/footer_img/facebook.svg" alt="Facebook"></a>
+                        <a href="#"><img src="img/footer_img/pinterest.svg" alt="Pinterest"></a>
+                        <a href="#"><img src="img/footer_img/youtube.svg" alt="YouTube"></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Каталог</h4>
+                    <ul>
+                        <li><a href="series.html?name=Blossom">Blossom</a></li>
+                        <li><a href="series.html?name=Madrid">Madrid</a></li>
+                        <li><a href="series.html?name=Hampton">Hampton</a></li>
+                        <li><a href="series.html?name=Charlton">Charlton</a></li>
+                        <li><a href="series.html?name=Symphony">Symphony</a></li>
+                        <li><a href="series.html?name=Cozy">Cozy</a></li>
+                        <li><a href="series.html?name=Hudson">Hudson</a></li>
+                        <li><a href="series.html?name=Aurora">Aurora</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Информация</h4>
+                    <ul>
+                        <li><a href="about.html">О нас</a></li>
+                        <li><a href="delivery.html">Доставка и оплата</a></li>
+                        <li><a href="#">Гарантия</a></li>
+                        <li><a href="#">Блог</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Контакты</h4>
+                    <div class="footer-contact">
+                        <p><img src="img/footer_img/phone.svg" alt="Телефон"> +7 (915) 401-57-54</p>
+                        <p><img src="img/footer_img/email.svg" alt="Email"> info@stul.ru</p>
+                        <p><img src="img/footer_img/location.svg" alt="Адрес"> Москва, ул. Большая Дмитровка, 20</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2024 STUL. Все права защищены</p>
+                <div class="footer-bottom-links">
+                    <a href="#">Политика конфиденциальности</a>
+                    <a href="#">Пользовательское соглашение</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Корзина</h3>
+            <span class="close-cart" onclick="closeCart()">&times;</span>
+        </div>
+        <div class="cart-items" id="cartItems"></div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Итого:</span>
+                <span id="cartTotal">0 ₽</span>
+            </div>
+            <button class="checkout-btn" onclick="checkout()">Оформить заказ</button>
+        </div>
+    </div>
+
+    <div class="auth-modal" id="authModal">
+        <div class="auth-modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>Авторизация / Регистрация</h2>
+            <form id="authForm">
+                <input type="text" placeholder="Имя" required>
+                <input type="tel" placeholder="Телефон" required>
+                <input type="email" placeholder="Email" required>
+                <input type="password" placeholder="Пароль" required>
+                <div class="form-buttons">
+                    <button type="submit" class="register-btn">Зарегистрироваться</button>
+                    <button type="button" class="login-btn">Войти</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Данные для каждой серии с вашими фотографиями
+        const seriesData = {
+            'Blossom': {
+                title: 'Blossom',
+                description: 'Элегантная садовая мебель с плетением Rope',
+                products: [
+                    { id: 'blossom6', name: 'Blossom 6', price: 790070, image: 'img/products/blossom/blossom6/blossom6.webp', badge: 'Популярное' },
+                    { id: 'blossom8', name: 'Blossom 8', price: 980210, image: 'img/products/blossom/blossom8/blossom8.webp', badge: 'Новинка' },
+                    { id: 'blossom-sofa', name: 'Blossom Sofa', price: 450000, image: 'img/products/blossom/sofa/sofa.webp', badge: '' },
+                    { id: 'blossom-chair', name: 'Blossom Chair', price: 120000, image: 'img/products/blossom/chair/chair.webp', badge: '' },
+                    { id: 'blossom-table', name: 'Blossom Table', price: 350000, image: 'img/products/blossom/table/table.webp', badge: 'Хит' },
+                    { id: 'blossom-lounge', name: 'Blossom Lounge', price: 680000, image: 'img/products/blossom/lounge/lounge.webp', badge: '' }
+                ]
+            },
+            'Madrid': {
+                title: 'Madrid',
+                description: 'Классический испанский стиль',
+                products: [
+                    { id: 'madrid1', name: 'Madrid 1', price: 910760, image: 'img/products/madrid/madrid1/madrid1.webp', badge: 'Популярное' },
+                    { id: 'madrid2', name: 'Madrid 2', price: 890000, image: 'img/products/madrid/madrid2/madrid2.webp', badge: '' },
+                    { id: 'madrid3', name: 'Madrid 3', price: 750000, image: 'img/products/madrid/madrid3/madrid3.webp', badge: 'Новинка' },
+                    { id: 'madrid4', name: 'Madrid 4', price: 1200000, image: 'img/products/madrid/madrid4/madrid4.webp', badge: 'Премиум' }
+                ]
+            },
+            'Hampton': {
+                title: 'Hampton',
+                description: 'Американская классика',
+                products: [
+                    { id: 'hampton1', name: 'Hampton 1', price: 910340, image: 'img/products/hampton/hampton1/hampton1.webp', badge: 'Популярное' },
+                    { id: 'hampton2', name: 'Hampton 2', price: 820000, image: 'img/products/hampton/hampton2/hampton2.webp', badge: '' },
+                    { id: 'hampton3', name: 'Hampton 3', price: 950000, image: 'img/products/hampton/hampton3/hampton3.webp', badge: 'Новинка' },
+                    { id: 'hampton4', name: 'Hampton 4', price: 680000, image: 'img/products/hampton/hampton4/hampton4.webp', badge: '' },
+                    { id: 'hampton5', name: 'Hampton 5', price: 1100000, image: 'img/products/hampton/hampton5/hampton5.webp', badge: 'Хит' }
+                ]
+            },
+            'Charlton': {
+                title: 'Charlton',
+                description: 'Английский аристократизм',
+                products: [
+                    { id: 'charlton1', name: 'Charlton 1', price: 890120, image: 'img/products/charlton/charlton1/charlton1.webp', badge: 'Популярное' },
+                    { id: 'charlton2', name: 'Charlton 2', price: 950000, image: 'img/products/charlton/charlton2/charlton2.webp', badge: '' },
+                    { id: 'charlton3', name: 'Charlton 3', price: 780000, image: 'img/products/charlton/charlton3/charlton3.webp', badge: 'Новинка' }
+                ]
+            },
+            'Symphony': {
+                title: 'Symphony',
+                description: 'Современная элегантность',
+                products: [
+                    { id: 'symphony1', name: 'Symphony 1', price: 810120, image: 'img/products/symphony/symphony1/symphony1.webp', badge: 'Популярное' },
+                    { id: 'symphony2', name: 'Symphony 2', price: 890000, image: 'img/products/symphony/symphony2/symphony2.webp', badge: '' },
+                    { id: 'symphony3', name: 'Symphony 3', price: 950000, image: 'img/products/symphony/symphony3/symphony3.webp', badge: 'Новинка' },
+                    { id: 'symphony4', name: 'Symphony 4', price: 720000, image: 'img/products/symphony/symphony4/symphony4.webp', badge: '' }
+                ]
+            },
+            'Cozy': {
+                title: 'Cozy',
+                description: 'Максимальный комфорт',
+                products: [
+                    { id: 'cozy1', name: 'Cozy 1', price: 1100670, image: 'img/products/cozy/cozy1/cozy1.webp', badge: 'Премиум' },
+                    { id: 'cozy2', name: 'Cozy 2', price: 890000, image: 'img/products/cozy/cozy2/cozy2.webp', badge: '' },
+                    { id: 'cozy3', name: 'Cozy 3', price: 950000, image: 'img/products/cozy/cozy3/cozy3.webp', badge: 'Новинка' }
+                ]
+            },
+            'Hudson': {
+                title: 'Hudson',
+                description: 'Индустриальный шик',
+                products: [
+                    { id: 'hudson1', name: 'Hudson 1', price: 850570, image: 'img/products/hudson/hudson1/hudson1.webp', badge: 'Популярное' },
+                    { id: 'hudson2', name: 'Hudson 2', price: 920000, image: 'img/products/hudson/hudson2/hudson2.webp', badge: '' },
+                    { id: 'hudson3', name: 'Hudson 3', price: 780000, image: 'img/products/hudson/hudson3/hudson3.webp', badge: 'Новинка' },
+                    { id: 'hudson4', name: 'Hudson 4', price: 1100000, image: 'img/products/hudson/hudson4/hudson4.webp', badge: 'Хит' }
+                ]
+            },
+            'Aurora': {
+                title: 'Aurora',
+                description: 'Северное сияние в вашем саду',
+                products: [
+                    { id: 'aurora1', name: 'Aurora 1', price: 790000, image: 'img/products/aurora/aurora1/aurora1.webp', badge: 'Популярное' },
+                    { id: 'aurora2', name: 'Aurora 2', price: 860000, image: 'img/products/aurora/aurora2/aurora2.webp', badge: '' },
+                    { id: 'aurora3', name: 'Aurora 3', price: 1200000, image: 'img/products/aurora/aurora3/aurora3.webp', badge: 'Премиум' }
+                ]
+            }
+        };
+
+        // Получаем название серии из URL
+        function getSeriesName() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('name') || 'Blossom';
+        }
+
+        // Загружаем данные серии
+        function loadSeries() {
+            const seriesName = getSeriesName();
+            const series = seriesData[seriesName];
+            
+            if (!series) {
+                window.location.href = 'catalog.html';
+                return;
+            }
+
+            document.getElementById('series-name').textContent = series.title;
+            document.getElementById('series-title').textContent = series.title;
+            document.getElementById('series-description').textContent = series.description;
+
+            const container = document.getElementById('products-container');
+            container.innerHTML = '';
+
+            series.products.forEach(product => {
+                const badgeHtml = product.badge ? `<div class="badge">${product.badge}</div>` : '';
+                
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                card.onclick = () => location.href = `product.html?id=${product.id}`;
+                card.innerHTML = `
+                    <img src="${product.image}" alt="${product.name}">
+                    <h3>${product.name}</h3>
+                    <div class="price">${product.price.toLocaleString()} ₽</div>
+                    ${badgeHtml}
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', loadSeries);
+    </script>
+</body>
+</html>

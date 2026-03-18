@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STUL - О нас</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .logo_img {
+            height: 70px;
+            width: auto;
+            opacity: 0.9;
+        }
+        .about-hero {
+            height: 70vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('img/about_img/about-hero.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+            position: relative;
+        }
+
+        .about-hero-content {
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .about-hero-content h1 {
+            font-size: 72px;
+            margin-bottom: 20px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .about-hero-content p {
+            font-size: 18px;
+            line-height: 1.8;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .breadcrumbs {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            color: rgba(255,255,255,0.8);
+            font-size: 14px;
+        }
+
+        .breadcrumbs a {
+            color: rgba(255,255,255,0.8);
+            transition: color 0.3s;
+        }
+
+        .breadcrumbs a:hover {
+            color: #fff;
+        }
+
+        .about-section {
+            padding: 80px 30px;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-size: 42px;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .about-text h2::after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 0;
+            width: 70px;
+            height: 3px;
+            background: #000;
+        }
+
+        .about-text p {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #444;
+            margin-bottom: 20px;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .stats-section {
+            background: #000;
+            color: #fff;
+            padding: 60px 30px;
+            text-align: center;
+        }
+
+        .stats-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+
+        .stat-item {
+            padding: 20px;
+        }
+
+        .stat-number {
+            font-size: 56px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .stat-label {
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0.8;
+        }
+
+        .mission-section {
+            background: #f5f5f5;
+            padding: 80px 30px;
+        }
+
+        .mission-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+
+        .mission-card {
+            background: #fff;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+            transition: transform 0.3s;
+        }
+
+        .mission-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .mission-icon {
+            width: 60px;
+            height: 60px;
+            background: #000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+        }
+
+        .mission-icon img {
+            width: 30px;
+            height: 30px;
+            filter: brightness(0) invert(1);
+        }
+
+        .mission-card h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .mission-card p {
+            font-size: 14px;
+            line-height: 1.7;
+            color: #666;
+        }
+
+        .team-section {
+            padding: 80px 30px;
+            max-width: 1300px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .team-section h2 {
+            font-size: 42px;
+            margin-bottom: 15px;
+        }
+
+        .team-section > p {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 50px;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+
+        .team-member {
+            text-align: center;
+        }
+
+        .member-photo {
+            width: 100%;
+            aspect-ratio: 1;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+        }
+
+        .member-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .team-member:hover img {
+            transform: scale(1.05);
+        }
+
+        .team-member h3 {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .team-member p {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .values-section {
+            background: #fff;
+            padding: 80px 30px;
+        }
+
+        .values-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+        }
+
+        .value-item {
+            display: flex;
+            gap: 25px;
+            align-items: flex-start;
+        }
+
+        .value-number {
+            font-size: 48px;
+            font-weight: 700;
+            color: #000;
+            opacity: 0.2;
+            line-height: 1;
+        }
+
+        .value-content h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .value-content p {
+            font-size: 14px;
+            line-height: 1.7;
+            color: #666;
+        }
+
+        .cta-section {
+            background: #000;
+            color: #fff;
+            padding: 80px 30px;
+            text-align: center;
+        }
+
+        .cta-container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .cta-container h2 {
+            font-size: 42px;
+            margin-bottom: 20px;
+        }
+
+        .cta-container p {
+            font-size: 16px;
+            margin-bottom: 40px;
+            opacity: 0.8;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #fff;
+            color: #000;
+            padding: 15px 45px;
+            border-radius: 40px;
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .cta-button:hover {
+            background: #333;
+            color: #fff;
+            transform: scale(1.03);
+        }
+
+        @media (max-width: 1200px) {
+            .team-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 992px) {
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .stats-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .mission-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .team-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .values-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .about-hero-content h1 {
+                font-size: 48px;
+            }
+            
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .mission-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stat-number {
+                font-size: 42px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="header-left">
+                <a href="index.html" class="logo-link">
+                    <img class="logo_img" src="img/header_img/stud_logo.png" alt="STUL">
+                </a>
+                <nav class="menu">
+                    <a href="catalog.html">Каталог</a>
+                    <a href="delivery.html">Доставка</a>
+                    <a href="about.html">О нас</a>
+                </nav>
+            </div>
+            <div class="header-right">
+                <div class="search-container">
+                    <input type="text" class="search-input" placeholder="Поиск">
+                    <img src="img/header_img/search_logo.png" alt="Поиск" class="search-icon">
+                </div>
+                <div class="icon-group">
+                    <img src="img/header_img/user_logo.png" alt="Войти" class="header-icon user-icon">
+                    <img src="img/header_img/favorite_logo.png" alt="Избранное" class="header-icon favorites-icon">
+                    <div class="basket-icon" id="cartIcon">
+                        <img src="img/header_img/backet_logo.png" alt="Корзина">
+                        <span class="cart-count" id="cartCount">0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="about-hero">
+            <div class="breadcrumbs">
+                <a href="index.html">Главная</a> / <span>О нас</span>
+            </div>
+            <div class="about-hero-content">
+                <h1>STUL</h1>
+                <p>Создаем пространство для красивой жизни. Премиальная мебель из дерева, которая объединяет людей и подчеркивает архитектуру вашего дома.</p>
+            </div>
+        </section>
+
+        <section class="about-section">
+            <div class="about-grid">
+                <div class="about-text">
+                    <h2>О бренде</h2>
+                    <p>STUL родился из любви к натуральным материалам и стремления создавать мебель, которая будет радовать своих владельцев десятилетиями. Мы убеждены, что настоящая роскошь — это возможность окружить себя качественными, экологичными и эстетичными предметами интерьера.</p>
+                    <p>Наша мебель создается вручную мастерами с многолетним опытом. Мы используем только отборную древесину твердых пород и натуральные материалы, которые с годами становятся только красивее.</p>
+                    <p>Каждое изделие STUL — это не просто предмет мебели, это часть вашего дома, вашей истории и вашего комфорта.</p>
+                </div>
+                <div class="about-image">
+                    <img src="img/about_img/about-1.jpg" alt="Мастерская STUL">
+                </div>
+            </div>
+        </section>
+
+        <section class="stats-section">
+            <div class="stats-container">
+                <div class="stat-item">
+                    <div class="stat-number">12+</div>
+                    <div class="stat-label">Коллекций премиальной мебели</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">25+</div>
+                    <div class="stat-label">лет опыта производства</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">200+</div>
+                    <div class="stat-label">реализованных проектов</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mission-section">
+            <div class="mission-container">
+                <div class="mission-card">
+                    <div class="mission-icon">
+                        <img src="img/about_img/icon-wood.svg" alt="Натуральные материалы">
+                    </div>
+                    <h3>Натуральные материалы</h3>
+                    <p>Мы используем только массивы ценных пород дерева: дуб, ясень, орех. Каждое изделие уникально благодаря природной текстуре древесины.</p>
+                </div>
+                <div class="mission-card">
+                    <div class="mission-icon">
+                        <img src="img/about_img/icon-hand.svg" alt="Ручная работа">
+                    </div>
+                    <h3>Ручная работа</h3>
+                    <p>Каждое изделие создается вручную нашими мастерами. Мы не используем конвейерное производство — только индивидуальный подход.</p>
+                </div>
+                <div class="mission-card">
+                    <div class="mission-icon">
+                        <img src="img/about_img/icon-eco.svg" alt="Экологичность">
+                    </div>
+                    <h3>Экологичность</h3>
+                    <p>Мы заботимся о природе и используем только безопасные масла и воски для покрытия мебели. Наши изделия безопасны даже для детей.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="about-section">
+            <div class="about-grid" style="direction: rtl;">
+                <div class="about-text" style="direction: ltr;">
+                    <h2>Философия</h2>
+                    <p>Мы верим, что мебель должна не просто заполнять пространство, а создавать атмосферу. Атмосферу уюта, тепла и гармонии. Именно поэтому каждый предмет мы продумываем до мелочей — от эргономики до тактильных ощущений.</p>
+                    <p>Наша философия — современный минимализм с душой. Мы избегаем излишнего декора, но добавляем в каждое изделие детали, которые делают его особенным: изящные столярные соединения, идеально подобранные пропорции, благородные текстуры.</p>
+                    <p>STUL — это мебель, которая будет радовать вас каждый день.</p>
+                </div>
+                <div class="about-image">
+                    <img src="img/about_img/about-2.jpg" alt="Философия STUL">
+                </div>
+            </div>
+        </section>
+
+        <section class="team-section">
+            <h2>Наша команда</h2>
+            <p>Люди, которые создают для вас идеальную мебель</p>
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="member-photo">
+                        <img src="img/about_img/team-1.jpg" alt="Александр Петров">
+                    </div>
+                    <h3>Александр Петров</h3>
+                    <p>Основатель, дизайнер</p>
+                </div>
+                <div class="team-member">
+                    <div class="member-photo">
+                        <img src="img/about_img/team-2.jpg" alt="Екатерина Смирнова">
+                    </div>
+                    <h3>Екатерина Смирнова</h3>
+                    <p>Главный архитектор</p>
+                </div>
+                <div class="team-member">
+                    <div class="member-photo">
+                        <img src="img/about_img/team-3.jpg" alt="Дмитрий Волков">
+                    </div>
+                    <h3>Дмитрий Волков</h3>
+                    <p>Мастер-краснодеревщик</p>
+                </div>
+                <div class="team-member">
+                    <div class="member-photo">
+                        <img src="img/about_img/team-4.jpg" alt="Мария Иванова">
+                    </div>
+                    <h3>Мария Иванова</h3>
+                    <p>Менеджер проектов</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="values-section">
+            <div class="values-container">
+                <div class="value-item">
+                    <div class="value-number">01</div>
+                    <div class="value-content">
+                        <h3>Качество</h3>
+                        <p>Мы не идем на компромиссы. Только лучшие материалы, только проверенные технологии, только ручной контроль каждого изделия.</p>
+                    </div>
+                </div>
+                <div class="value-item">
+                    <div class="value-number">02</div>
+                    <div class="value-content">
+                        <h3>Индивидуальность</h3>
+                        <p>Каждый проект уникален. Мы учитываем все пожелания клиента и создаем мебель, которая идеально вписывается в интерьер.</p>
+                    </div>
+                </div>
+                <div class="value-item">
+                    <div class="value-number">03</div>
+                    <div class="value-content">
+                        <h3>Долговечность</h3>
+                        <p>Наша мебель создана на десятилетия. Правильный уход за деревом позволяет сохранять ее красоту на протяжении многих лет.</p>
+                    </div>
+                </div>
+                <div class="value-item">
+                    <div class="value-number">04</div>
+                    <div class="value-content">
+                        <h3>Ответственность</h3>
+                        <p>Мы отвечаем за каждое изделие и предоставляем расширенную гарантию. Ваше доверие — наша главная ценность.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <div class="cta-container">
+                <h2>Готовы создать интерьер своей мечты?</h2>
+                <p>Приходите в наши шоурумы, чтобы увидеть мебель вживую, или свяжитесь с нами для индивидуальной консультации</p>
+                <a href="catalog.html" class="cta-button">Перейти в каталог</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-top">
+                <div class="footer-logo">
+                    <img src="img/header_img/stud_logo.png" alt="STUL">
+                    <p>Премиальная мебель из дерева и натуральных материалов для вашего дома</p>
+                    <div class="social-links">
+                        <a href="#"><img src="img/footer_img/instagram.svg" alt="Instagram"></a>
+                        <a href="#"><img src="img/footer_img/facebook.svg" alt="Facebook"></a>
+                        <a href="#"><img src="img/footer_img/pinterest.svg" alt="Pinterest"></a>
+                        <a href="#"><img src="img/footer_img/youtube.svg" alt="YouTube"></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Каталог</h4>
+                    <ul>
+                        <li><a href="series.html?name=Blossom">Blossom</a></li>
+                        <li><a href="series.html?name=Madrid">Madrid</a></li>
+                        <li><a href="series.html?name=Hampton">Hampton</a></li>
+                        <li><a href="series.html?name=Charlton">Charlton</a></li>
+                        <li><a href="series.html?name=Symphony">Symphony</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Информация</h4>
+                    <ul>
+                        <li><a href="about.html">О нас</a></li>
+                        <li><a href="delivery.html">Доставка и оплата</a></li>
+                        <li><a href="#">Гарантия</a></li>
+                        <li><a href="#">Блог</a></li>
+                        <li><a href="#">Вакансии</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Контакты</h4>
+                    <div class="footer-contact">
+                        <p>
+                            <img src="img/footer_img/phone.svg" alt="Телефон">
+                            +7 (915) 401-57-54
+                        </p>
+                        <p>
+                            <img src="img/footer_img/email.svg" alt="Email">
+                            info@stul.ru
+                        </p>
+                        <p>
+                            <img src="img/footer_img/location.svg" alt="Адрес">
+                            г. Москва, ул. Большая Дмитровка, 20
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2024 STUL. Все права защищены</p>
+                <div class="footer-bottom-links">
+                    <a href="#">Политика конфиденциальности</a>
+                    <a href="#">Пользовательское соглашение</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Корзина</h3>
+            <span class="close-cart" onclick="closeCart()">&times;</span>
+        </div>
+        <div class="cart-items" id="cartItems"></div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Итого:</span>
+                <span id="cartTotal">0 ₽</span>
+            </div>
+            <button class="checkout-btn" onclick="checkout()">Оформить заказ</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const userIcon = document.querySelector('.user-icon');
+            if (userIcon) {
+                userIcon.style.pointerEvents = 'none';
+                userIcon.style.opacity = '0.5';
+                userIcon.title = 'Авторизация временно недоступна';
+            }
+        });
+    </script>
+</body>
+</html>
