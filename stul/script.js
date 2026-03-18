@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (userIcon) {
         userIcon.addEventListener('click', function() {
-            document.querySelector("#authModal").classList.add("open")
+            alert('Авторизация временно недоступна');
         });
     }
 
