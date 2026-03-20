@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STUL - дерево. душа. форма</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        header {
+            background-color: transparent;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+            padding: 20px 0;
+            box-shadow: none;
+        }
+        
+        .header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo_img {
+            height: 70px;
+            width: auto;
+            opacity: 0.9;
+        }
+        
+        .menu {
+            display: flex;
+            gap: 40px;
+        }
+        
+        .menu a {
+            font-size: 13px;
+            font-weight: 400;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #000;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+        
+        .menu a:hover {
+            opacity: 1;
+        }
+        
+        .menu a::after {
+            display: none;
+        }
+        
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+        
+        .search-container {
+            position: relative;
+        }
+        
+        .search-input {
+            padding: 8px 0;
+            padding-right: 25px;
+            border: none;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+            background: transparent;
+            font-family: 'Playfair Display', serif;
+            font-size: 13px;
+            width: 150px;
+            transition: all 0.3s;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-bottom-color: #000;
+            width: 200px;
+        }
+        
+        .search-icon {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 16px;
+            height: 16px;
+            opacity: 0.5;
+            cursor: pointer;
+        }
+        
+        .icon-group {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .header-icon {
+            width: 18px;
+            height: 18px;
+            opacity: 0.6;
+            transition: opacity 0.3s;
+            cursor: pointer;
+        }
+        
+        .header-icon:hover {
+            opacity: 1;
+        }
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #e9eae5;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('img/main_img/texture.png');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.03;
+            pointer-events: none;
+        }
+        
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero-label {
+            font-size: 12px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: #666;
+            margin-bottom: 20px;
+            transform: translateY(-20px);
+        }
+        
+        .hero-title {
+            font-size: clamp(80px, 15vw, 180px);
+            font-weight: 400;
+            line-height: 0.9;
+            color: #000;
+            margin-bottom: 40px;
+            text-align: center;
+            letter-spacing: -2px;
+        }
+        
+        .hero-image-wrapper {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin: 20px 0 40px;
+        }
+        
+        .hero-image {
+            max-width: 400px;
+            width: 60%;
+            height: auto;
+            filter: drop-shadow(0 20px 40px rgba(0,0,0,0.05));
+        }
+        
+        .hero-description {
+            max-width: 500px;
+            text-align: center;
+            font-size: 14px;
+            line-height: 1.8;
+            color: #444;
+            margin-bottom: 40px;
+        }
+        
+        .hero-btn {
+            display: inline-block;
+            padding: 12px 40px;
+            border: 1px solid #000;
+            background: transparent;
+            color: #000;
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .hero-btn:hover {
+            background: #000;
+            color: #fff;
+        }
+        
+        .hero-scroll {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #999;
+            writing-mode: vertical-rl;
+            rotate: 180deg;
+        }
+        
+        .marquee {
+            background: #f5f5f5;
+            padding: 12px 0;
+            overflow: hidden;
+            border-top: 1px solid rgba(0,0,0,0.03);
+            border-bottom: 1px solid rgba(0,0,0,0.03);
+        }
+        
+        .marquee-content {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            animation: scroll 25s linear infinite;
+            white-space: nowrap;
+        }
+        
+        .marquee-content span {
+            font-size: 12px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #666;
+        }
+        
+        .marquee-content img {
+            width: 16px;
+            height: 16px;
+            opacity: 0.3;
+        }
+        
+        .philosophy {
+            padding: 120px 40px;
+            background: #fff;
+        }
+        
+        .philosophy-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .philosophy-label {
+            font-size: 11px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #999;
+            margin-bottom: 20px;
+        }
+        
+        .philosophy-title {
+            font-size: 42px;
+            font-weight: 400;
+            margin-bottom: 40px;
+            line-height: 1.2;
+        }
+        
+        .philosophy-text {
+            font-size: 16px;
+            line-height: 1.9;
+            color: #555;
+            max-width: 700px;
+            margin: 0 auto 60px;
+        }
+        
+        .philosophy-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 60px;
+        }
+        
+        .philosophy-card {
+            padding: 30px;
+            border: 1px solid rgba(0,0,0,0.03);
+            background: #fafafa;
+            transition: all 0.3s;
+        }
+        
+        .philosophy-card:hover {
+            background: #f5f5f5;
+            border-color: rgba(0,0,0,0.1);
+        }
+        
+        .philosophy-card h3 {
+            font-size: 18px;
+            font-weight: 400;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+        
+        .philosophy-card p {
+            font-size: 13px;
+            color: #777;
+            line-height: 1.7;
+        }
+        
+        .products {
+            padding: 100px 40px;
+            background: #f5f5f5;
+        }
+        
+        .products-header {
+            max-width: 1200px;
+            margin: 0 auto 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+        
+        .products-header-left h2 {
+            font-size: 32px;
+            font-weight: 400;
+            margin-bottom: 10px;
+        }
+        
+        .products-header-left p {
+            font-size: 14px;
+            color: #777;
+            letter-spacing: 1px;
+        }
+        
+        .products-header-right a {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #000;
+            border-bottom: 1px solid #000;
+            padding-bottom: 4px;
+            transition: opacity 0.3s;
+        }
+        
+        .products-header-right a:hover {
+            opacity: 0.5;
+        }
+        
+        .products-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+        
+        .product-item {
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .product-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .product-image {
+            aspect-ratio: 1;
+            background: #fff;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+            border-radius: 0;
+        }
+        
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        
+        .product-item h3 {
+            font-size: 14px;
+            font-weight: 400;
+            margin-bottom: 5px;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+        
+        .product-price {
+            font-size: 13px;
+            color: #666;
+            text-align: center;
+        }
+        
+        .collection {
+            padding: 100px 0;
+            background: #fff;
+            overflow: hidden;
+        }
+        
+        .collection-header {
+            max-width: 1200px;
+            margin: 0 auto 40px;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+        
+        .collection-header h2 {
+            font-size: 32px;
+            font-weight: 400;
+        }
+        
+        .collection-header p {
+            font-size: 13px;
+            color: #777;
+            max-width: 400px;
+            line-height: 1.7;
+        }
+        
+        .collection-scroll {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            padding: 0 40px 40px;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        
+        .collection-scroll::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .collection-card {
+            min-width: 280px;
+            background: #fafafa;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .collection-card:hover {
+            background: #f0f0f0;
+        }
+        
+        .collection-card img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+        }
+        
+        .collection-info {
+            padding: 20px;
+        }
+        
+        .collection-info h3 {
+            font-size: 16px;
+            font-weight: 400;
+            margin-bottom: 5px;
+        }
+        
+        .collection-info p {
+            font-size: 12px;
+            color: #777;
+            margin-bottom: 15px;
+        }
+        
+        .collection-link {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #000;
+            border-bottom: 1px solid #000;
+            padding-bottom: 2px;
+        }
+        
+        .showcase {
+            padding: 100px 40px;
+            background: #fafafa;
+        }
+        
+        .showcase-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        
+        .showcase-image img {
+            width: 100%;
+            height: auto;
+            filter: grayscale(100%);
+            transition: filter 0.5s;
+        }
+        
+        .showcase-image:hover img {
+            filter: grayscale(0);
+        }
+        
+        .showcase-content h2 {
+            font-size: 32px;
+            font-weight: 400;
+            margin-bottom: 30px;
+            line-height: 1.3;
+        }
+        
+        .showcase-content p {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 40px;
+        }
+        
+        .showcase-btn {
+            display: inline-block;
+            padding: 12px 40px;
+            border: 1px solid #000;
+            background: transparent;
+            color: #000;
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: all 0.3s;
+        }
+        
+        .showcase-btn:hover {
+            background: #000;
+            color: #fff;
+        }
+        
+        .locations {
+            padding: 100px 40px;
+            background: #fff;
+        }
+        
+        .locations-header {
+            max-width: 1200px;
+            margin: 0 auto 60px;
+            text-align: center;
+        }
+        
+        .locations-header h2 {
+            font-size: 32px;
+            font-weight: 400;
+            margin-bottom: 15px;
+        }
+        
+        .locations-header p {
+            font-size: 14px;
+            color: #777;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .locations-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        
+        .location-card {
+            border: 1px solid rgba(0,0,0,0.03);
+            padding: 30px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .location-card:hover {
+            background: #fafafa;
+            border-color: rgba(0,0,0,0.1);
+        }
+        
+        .location-city {
+            font-size: 18px;
+            font-weight: 400;
+            margin-bottom: 10px;
+        }
+        
+        .location-address {
+            font-size: 13px;
+            color: #777;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+        
+        .location-hours {
+            font-size: 11px;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        footer {
+            background: #f5f5f5;
+            padding: 60px 40px 30px;
+            border-top: 1px solid rgba(0,0,0,0.03);
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .footer-top {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            gap: 60px;
+            margin-bottom: 50px;
+        }
+        
+        .footer-logo img {
+            height: 32px;
+            width: auto;
+            margin-bottom: 20px;
+            opacity: 0.8;
+        }
+        
+        .footer-logo p {
+            color: #777;
+            font-size: 12px;
+            line-height: 1.7;
+            max-width: 250px;
+        }
+        
+        .footer-col h4 {
+            font-size: 12px;
+            font-weight: 400;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #000;
+            opacity: 0.5;
+        }
+        
+        .footer-col ul {
+            list-style: none;
+        }
+        
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-col ul li a {
+            color: #666;
+            font-size: 12px;
+            transition: color 0.3s;
+        }
+        
+        .footer-col ul li a:hover {
+            color: #000;
+        }
+        
+        .footer-contact p {
+            color: #666;
+            font-size: 12px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .footer-contact img {
+            width: 14px;
+            height: 14px;
+            opacity: 0.3;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            background: rgba(0,0,0,0.02);
+            border-radius: 50%;
+            transition: background 0.3s;
+        }
+        
+        .social-links a:hover {
+            background: rgba(0,0,0,0.05);
+        }
+        
+        .social-links img {
+            width: 14px;
+            height: 14px;
+            opacity: 0.3;
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid rgba(0,0,0,0.03);
+            padding-top: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #999;
+            font-size: 11px;
+        }
+        
+        .footer-bottom-links {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .footer-bottom-links a {
+            color: #999;
+            font-size: 11px;
+            transition: color 0.3s;
+        }
+        
+        .footer-bottom-links a:hover {
+            color: #000;
+        }
+        
+        @media (max-width: 992px) {
+            .menu {
+                display: none;
+            }
+            
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .philosophy-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .showcase-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .locations-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-top {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 60px;
+            }
+            
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .products-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 20px;
+            }
+            
+            .footer-top {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="header-left">
+                <a href="index.html" class="logo-link">
+                    <img class="logo_img" src="img/header_img/stud_logo.png" alt="STUL">
+                </a>
+                <nav class="menu">
+                    <a href="catalog.html">Каталог</a>
+                    <a href="delivery.html">Доставка</a>
+                    <a href="about.html">О нас</a>
+                </nav>
+            </div>
+            <div class="header-right">
+                <div class="search-container">
+                    <input type="text" class="search-input" placeholder="Поиск">
+                    <img src="img/header_img/search_logo.png" alt="Поиск" class="search-icon">
+                </div>
+                <div class="icon-group">
+                    <img src="img/header_img/user_logo.png" alt="Войти" class="header-icon user-icon">
+                    <img src="img/header_img/favorite_logo.png" alt="Избранное" class="header-icon favorites-icon">
+                    <div class="basket-icon" id="cartIcon">
+                        <img src="img/header_img/backet_logo.png" alt="Корзина">
+                        <span class="cart-count" id="cartCount">0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-background"></div>
+            <div class="hero-content">
+                <div class="hero-label">STUL</div>
+                <h1 class="hero-title">woodcraft</h1>
+                <div class="hero-image-wrapper">
+                    <img src="img/main_img/big_stul.png" alt="STUL кресло" class="hero-image">
+                </div>
+                <p class="hero-description">
+                    Мебель из дерева и натуральных материалов.<br>
+                    Современный минимализм с нотками креатива.
+                </p>
+                <a href="catalog.html" class="hero-btn">Перейти в каталог</a>
+            </div>
+            <div class="hero-scroll">SCROLL</div>
+        </section>
+
+        <div class="marquee">
+            <div class="marquee-content">
+                <span>bespoke</span>
+                <img src="img/bespoke_img1/star-bespoke.png" alt="★">
+                <span>bespoke</span>
+                <img src="img/bespoke_img1/star-bespoke.png" alt="★">
+                <span>bespoke</span>
+                <img src="img/bespoke_img1/star-bespoke.png" alt="★">
+                <span>bespoke</span>
+                <img src="img/bespoke_img1/star-bespoke.png" alt="★">
+                <span>bespoke</span>
+                <img src="img/bespoke_img1/star-bespoke.png" alt="★">
+                <span>bespoke</span>
+                <img src="img/bespoke_img1/star-bespoke.png" alt="★">
+                <span>bespoke</span>
+                <img src="img/bespoke_img1/star-bespoke.png" alt="★">
+                <span>bespoke</span>
+                <img src="img/bespoke_img1/star-bespoke.png" alt="★">
+                <span>bespoke</span>
+                <img src="img/bespoke_img1/star-bespoke.png" alt="★">
+                <span>bespoke</span>
+                <img src="img/bespoke_img1/star-bespoke.png" alt="★">
+                <span>bespoke</span>
+                <img src="img/bespoke_img1/star-bespoke.png" alt="★">
+                <span>bespoke</span>
+                <img src="img/bespoke_img1/star-bespoke.png" alt="★">
+                <span>bespoke</span>
+                <img src="img/bespoke_img1/star-bespoke.png" alt="★">
+                <span>bespoke</span>
+                <img src="img/bespoke_img1/star-bespoke.png" alt="★">
+                <span>bespoke</span>
+                <img src="img/bespoke_img1/star-bespoke.png" alt="★">
+                <span>bespoke</span>
+                <img src="img/bespoke_img1/star-bespoke.png" alt="★">
+                <span>bespoke</span>
+                <img src="img/bespoke_img1/star-bespoke.png" alt="★">
+                <span>bespoke</span>
+                <img src="img/bespoke_img1/star-bespoke.png" alt="★">
+                <span>bespoke</span>
+                <img src="img/bespoke_img1/star-bespoke.png" alt="★">
+                <span>bespoke</span>
+                <img src="img/bespoke_img1/star-bespoke.png" alt="★">
+            </div>
+        </div>
+
+        <section class="philosophy">
+            <div class="philosophy-container">
+                <div class="philosophy-label">ФИЛОСОФИЯ</div>
+                <h2 class="philosophy-title">Дерево. Душа. Форма.</h2>
+                <p class="philosophy-text">
+                    Мы создаем мебель, которая живет. Каждое изделие рождается из любви к натуральным материалам и уважения к ремеслу. Никакого лишнего декора — только чистота линий и тепло дерева.
+                </p>
+                <div class="philosophy-grid">
+                    <div class="philosophy-card">
+                        <h3>Материалы</h3>
+                        <p>Только отборная древесина твердых пород. Дуб, ясень, орех — каждый кусок дерева мы отбираем вручную.</p>
+                    </div>
+                    <div class="philosophy-card">
+                        <h3>Ремесло</h3>
+                        <p>Ручная работа мастеров с многолетним опытом. Никаких конвейеров — только индивидуальный подход.</p>
+                    </div>
+                    <div class="philosophy-card">
+                        <h3>Дизайн</h3>
+                        <p>Современный минимализм, который не стареет. Формы, продиктованные функцией и красотой материала.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="products">
+            <div class="products-header">
+                <div class="products-header-left">
+                    <h2>Избранное</h2>
+                    <p>Бестселлеры сезона</p>
+                </div>
+                <div class="products-header-right">
+                    <a href="catalog.html">Все предметы →</a>
+                </div>
+            </div>
+            <div class="products-grid">
+                <div class="product-item" onclick="location.href='product.html?id=forma-soft'">
+                    <div class="product-image">
+                        <img src="img/best-seller_img/Forma-Soft.png" alt="Forma Soft">
+                    </div>
+                    <h3>Forma Soft</h3>
+                    <div class="product-price">45 000 ₽</div>
+                </div>
+                <div class="product-item" onclick="location.href='product.html?id=boucle-frame'">
+                    <div class="product-image">
+                        <img src="img/best-seller_img/Boucle-Frame.png" alt="Bouclé Frame">
+                    </div>
+                    <h3>Bouclé Frame</h3>
+                    <div class="product-price">52 000 ₽</div>
+                </div>
+                <div class="product-item" onclick="location.href='product.html?id=aurora-low'">
+                    <div class="product-image">
+                        <img src="img/best-seller_img/Aurora-Low.png" alt="Aurora Low">
+                    </div>
+                    <h3>Aurora Low</h3>
+                    <div class="product-price">34 000 ₽</div>
+                </div>
+                <div class="product-item" onclick="location.href='product.html?id=nido-chair'">
+                    <div class="product-image">
+                        <img src="img/best-seller_img/Nido-Chair.png" alt="Nido Chair">
+                    </div>
+                    <h3>Nido Chair</h3>
+                    <div class="product-price">55 000 ₽</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="collection">
+            <div class="collection-header">
+                <h2>Коллекции</h2>
+                <p>Серии мебели, объединенные общим настроением и стилем</p>
+            </div>
+            <div class="collection-scroll">
+                <div class="collection-card" onclick="location.href='series.html?name=Blossom'">
+                    <img src="img/series_img/blossom-series.jpg" alt="Blossom">
+                    <div class="collection-info">
+                        <h3>Blossom</h3>
+                        <p>Элегантность и легкость</p>
+                        <span class="collection-link">6 предметов</span>
+                    </div>
+                </div>
+                <div class="collection-card" onclick="location.href='series.html?name=Madrid'">
+                    <img src="img/series_img/madrid-series.jpg" alt="Madrid">
+                    <div class="collection-info">
+                        <h3>Madrid</h3>
+                        <p>Испанский характер</p>
+                        <span class="collection-link">4 предмета</span>
+                    </div>
+                </div>
+                <div class="collection-card" onclick="location.href='series.html?name=Hampton'">
+                    <img src="img/series_img/hampton-series.jpeg" alt="Hampton">
+                    <div class="collection-info">
+                        <h3>Hampton</h3>
+                        <p>Американская классика</p>
+                        <span class="collection-link">5 предметов</span>
+                    </div>
+                </div>
+                <div class="collection-card" onclick="location.href='series.html?name=Charlton'">
+                    <img src="img/series_img/charlton-series.webp" alt="Charlton">
+                    <div class="collection-info">
+                        <h3>Charlton</h3>
+                        <p>Английский аристократизм</p>
+                        <span class="collection-link">3 предмета</span>
+                    </div>
+                </div>
+                <div class="collection-card" onclick="location.href='series.html?name=Symphony'">
+                    <img src="img/series_img/symphony-series.jpg" alt="Symphony">
+                    <div class="collection-info">
+                        <h3>Symphony</h3>
+                        <p>Современная элегантность</p>
+                        <span class="collection-link">4 предмета</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="showcase">
+            <div class="showcase-container">
+                <div class="showcase-image">
+                    <img src="img/bespoke_img1/big_photo_bespoke.png" alt="Интерьер STUL">
+                </div>
+                <div class="showcase-content">
+                    <h2>Пространство,<br>в котором хочется жить</h2>
+                    <p>Каждый предмет STUL создан не просто быть красивым — он создан быть частью вашей жизни. Уютные вечера с семьей, встречи с друзьями, минуты тишины наедине с собой.</p>
+                    <a href="about.html" class="showcase-btn">Узнать больше</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="locations">
+            <div class="locations-header">
+                <h2>Шоурумы</h2>
+                <p>Приходите увидеть и потрогать нашу мебель</p>
+            </div>
+            <div class="locations-grid">
+                <div class="location-card" onclick="window.open('https://yandex.ru/maps/?text=г. Москва, ул. Большая Дмитровка, д. 20, стр. 1', '_blank')">
+                    <div class="location-city">Москва</div>
+                    <div class="location-address">ул. Большая Дмитровка, 20</div>
+                    <div class="location-hours">Ежедневно 11:00–21:00</div>
+                </div>
+                <div class="location-card" onclick="window.open('https://yandex.ru/maps/?text=г. Москва, Пресненская наб., д. 8, стр. 1', '_blank')">
+                    <div class="location-city">Москва</div>
+                    <div class="location-address">Пресненская наб., 8</div>
+                    <div class="location-hours">Ежедневно 11:00–21:00</div>
+                </div>
+                <div class="location-card" onclick="window.open('https://yandex.ru/maps/?text=г. Москва, Садовая-Кудринская ул., д. 32, стр. 2', '_blank')">
+                    <div class="location-city">Москва</div>
+                    <div class="location-address">Садовая-Кудринская, 32</div>
+                    <div class="location-hours">Ежедневно 11:00–21:00</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-top">
+                <div class="footer-logo">
+                    <img src="img/header_img/stud_logo.png" alt="STUL">
+                    <p>Мебель из дерева и натуральных материалов. Современный минимализм с душой.</p>
+                    <div class="social-links">
+                        <a href="#"><img src="img/footer_img/instagram.svg" alt="Instagram"></a>
+                        <a href="#"><img src="img/footer_img/facebook.svg" alt="Facebook"></a>
+                        <a href="#"><img src="img/footer_img/pinterest.svg" alt="Pinterest"></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Каталог</h4>
+                    <ul>
+                        <li><a href="series.html?name=Blossom">Blossom</a></li>
+                        <li><a href="series.html?name=Madrid">Madrid</a></li>
+                        <li><a href="series.html?name=Hampton">Hampton</a></li>
+                        <li><a href="series.html?name=Symphony">Symphony</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Информация</h4>
+                    <ul>
+                        <li><a href="about.html">О нас</a></li>
+                        <li><a href="delivery.html">Доставка</a></li>
+                        <li><a href="#">Гарантия</a></li>
+                        <li><a href="#">Блог</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Контакты</h4>
+                    <div class="footer-contact">
+                        <p>
+                            <img src="img/footer_img/phone.svg" alt="Телефон">
+                            +7 (915) 401-57-54
+                        </p>
+                        <p>
+                            <img src="img/footer_img/email.svg" alt="Email">
+                            info@stul.ru
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2024 STUL</p>
+                <div class="footer-bottom-links">
+                    <a href="#">Политика</a>
+                    <a href="#">Пользовательское соглашение</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Корзина</h3>
+            <span class="close-cart" onclick="closeCart()">&times;</span>
+        </div>
+        <div class="cart-items" id="cartItems"></div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Итого:</span>
+                <span id="cartTotal">0 ₽</span>
+            </div>
+            <button class="checkout-btn" onclick="checkout()">Оформить заказ</button>
+        </div>
+    </div>
+
+    <div class="auth-modal" id="authModal">
+        <div class="auth-modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>Авторизация / Регистрация</h2>
+            <form id="authForm" action="php/scripts/reg_scripts.php" method="post">
+                <input type="text" name="first_name" placeholder="Имя" required>
+                <input type="text" name="last_name" placeholder="Фамилия" required>
+                <input type="tel" name="tel" placeholder="Телефон" required>
+                <input type="email" name="email" placeholder="Email" required>
+                <input type="password" name="password" placeholder="Пароль" required>
+                <div class="form-buttons">
+                    <button type="submit" class="register-btn">Зарегистрироваться</button>
+                    <button type="button" class="login-btn">Войти</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

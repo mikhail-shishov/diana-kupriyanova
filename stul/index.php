@@ -1103,11 +1103,12 @@
         <div class="auth-modal-content">
             <span class="close-btn">&times;</span>
             <h2>Авторизация / Регистрация</h2>
-            <form id="authForm">
-                <input type="text" placeholder="Имя" required>
-                <input type="tel" placeholder="Телефон" required>
-                <input type="email" placeholder="Email" required>
-                <input type="password" placeholder="Пароль" required>
+            <form id="authForm" action="php/scripts/reg_scripts.php" method="post">
+                <input type="text" name="first_name" placeholder="Имя" required>
+                <input type="text" name="last_name" placeholder="Фамилия" required>
+                <input type="tel" name="tel" placeholder="Телефон" required>
+                <input type="email" name="email" placeholder="Email" required>
+                <input type="password" name="password" placeholder="Пароль" required>
                 <div class="form-buttons">
                     <button type="submit" class="register-btn">Зарегистрироваться</button>
                     <button type="button" class="login-btn">Войти</button>

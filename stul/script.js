@@ -110,7 +110,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (favoritesIcon) {
         favoritesIcon.addEventListener('click', function() {
-            window.location.href = 'favorites.html';
+            window.location.href = 'favorites.php';
         });
     }
 

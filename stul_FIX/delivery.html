@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STUL - Доставка и оплата</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .logo_img {
+            height: 70px;
+            width: auto;
+            opacity: 0.9;
+        }
+        .delivery-hero {
+            height: 60vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url('img/delivery_img/delivery-hero.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+            position: relative;
+        }
+
+        .delivery-hero-content {
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .delivery-hero-content h1 {
+            font-size: 64px;
+            margin-bottom: 20px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .delivery-hero-content p {
+            font-size: 18px;
+            line-height: 1.8;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .breadcrumbs {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            color: rgba(255,255,255,0.8);
+            font-size: 14px;
+        }
+
+        .breadcrumbs a {
+            color: rgba(255,255,255,0.8);
+            transition: color 0.3s;
+        }
+
+        .breadcrumbs a:hover {
+            color: #fff;
+        }
+
+        .delivery-section {
+            padding: 80px 30px;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .delivery-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 50px;
+            align-items: center;
+        }
+
+        .delivery-text h2 {
+            font-size: 42px;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .delivery-text h2::after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 0;
+            width: 70px;
+            height: 3px;
+            background: #000;
+        }
+
+        .delivery-text p {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #444;
+            margin-bottom: 25px;
+        }
+
+        .delivery-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin: 60px 0;
+        }
+
+        .feature-card {
+            background: #f8f8f8;
+            padding: 40px 30px;
+            border-radius: 20px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 30px rgba(0,0,0,0.05);
+        }
+
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: #000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+        }
+
+        .feature-icon img {
+            width: 32px;
+            height: 32px;
+            filter: brightness(0) invert(1);
+        }
+
+        .feature-card h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .feature-card p {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.7;
+        }
+
+        .payment-section {
+            background: #f5f5f5;
+            padding: 80px 30px;
+        }
+
+        .payment-container {
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .payment-container h2 {
+            font-size: 42px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .payment-container > p {
+            text-align: center;
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 50px;
+        }
+
+        .payment-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+        }
+
+        .payment-card {
+            background: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.02);
+            transition: transform 0.3s;
+        }
+
+        .payment-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .payment-card img {
+            height: 40px;
+            width: auto;
+            margin-bottom: 20px;
+        }
+
+        .payment-card h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .payment-card p {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .timeline-section {
+            padding: 80px 30px;
+            background: #fff;
+        }
+
+        .timeline-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .timeline-container h2 {
+            font-size: 42px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .timeline-container > p {
+            text-align: center;
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 60px;
+        }
+
+        .timeline {
+            position: relative;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background: #ddd;
+        }
+
+        .timeline-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .timeline-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .timeline-content {
+            width: 45%;
+            background: #f8f8f8;
+            padding: 30px;
+            border-radius: 15px;
+            position: relative;
+        }
+
+        .timeline-content h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #000;
+        }
+
+        .timeline-content p {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.7;
+        }
+
+        .timeline-number {
+            width: 50px;
+            height: 50px;
+            background: #000;
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: 600;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+        }
+
+        .info-section {
+            background: #000;
+            color: #fff;
+            padding: 80px 30px;
+        }
+
+        .info-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 60px;
+        }
+
+        .info-box {
+            background: rgba(255,255,255,0.05);
+            padding: 40px;
+            border-radius: 20px;
+        }
+
+        .info-box h3 {
+            font-size: 28px;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .info-box h3::after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: #fff;
+        }
+
+        .info-list {
+            list-style: none;
+        }
+
+        .info-list li {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            font-size: 16px;
+            color: rgba(255,255,255,0.8);
+        }
+
+        .info-list li img {
+            width: 24px;
+            height: 24px;
+            filter: brightness(0) invert(1);
+            opacity: 0.8;
+        }
+
+        .contact-card {
+            background: rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 30px;
+        }
+
+        .contact-card p {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        .contact-card img {
+            width: 20px;
+            height: 20px;
+            filter: brightness(0) invert(1);
+        }
+
+        .faq-section {
+            padding: 80px 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .faq-section h2 {
+            font-size: 42px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .faq-section > p {
+            text-align: center;
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 50px;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid #ddd;
+            padding: 25px 0;
+        }
+
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .faq-question h3 {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .faq-question span {
+            font-size: 24px;
+            transition: transform 0.3s;
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s;
+            color: #666;
+            line-height: 1.7;
+            font-size: 14px;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 200px;
+            margin-top: 15px;
+        }
+
+        .faq-item.active .faq-question span {
+            transform: rotate(45deg);
+        }
+
+        .cta-section {
+            background: #f5f5f5;
+            padding: 60px 30px;
+            text-align: center;
+        }
+
+        .cta-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .cta-container h2 {
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+
+        .cta-container p {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #000;
+            color: #fff;
+            padding: 15px 45px;
+            border-radius: 40px;
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .cta-button:hover {
+            background: #333;
+            transform: scale(1.03);
+        }
+
+        @media (max-width: 992px) {
+            .delivery-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .payment-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .info-container {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .timeline::before {
+                left: 30px;
+            }
+            
+            .timeline-item,
+            .timeline-item:nth-child(even) {
+                flex-direction: column;
+                align-items: flex-start;
+                margin-left: 60px;
+            }
+            
+            .timeline-content {
+                width: 100%;
+            }
+            
+            .timeline-number {
+                left: -45px;
+                transform: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .delivery-hero-content h1 {
+                font-size: 42px;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .payment-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .info-box {
+                padding: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="header-left">
+                <a href="index.html" class="logo-link">
+                    <img class="logo_img" src="img/header_img/stud_logo.png" alt="STUL">
+                </a>
+                <nav class="menu">
+                    <a href="catalog.html">Каталог</a>
+                    <a href="delivery.html">Доставка</a>
+                    <a href="about.html">О нас</a>
+                </nav>
+            </div>
+            <div class="header-right">
+                <div class="search-container">
+                    <input type="text" class="search-input" placeholder="Поиск">
+                    <img src="img/header_img/search_logo.png" alt="Поиск" class="search-icon">
+                </div>
+                <div class="icon-group">
+                    <img src="img/header_img/user_logo.png" alt="Войти" class="header-icon user-icon">
+                    <img src="img/header_img/favorite_logo.png" alt="Избранное" class="header-icon favorites-icon">
+                    <div class="basket-icon" id="cartIcon">
+                        <img src="img/header_img/backet_logo.png" alt="Корзина">
+                        <span class="cart-count" id="cartCount">0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="delivery-hero">
+            <div class="breadcrumbs">
+                <a href="index.html">Главная</a> / <span>Доставка и оплата</span>
+            </div>
+            <div class="delivery-hero-content">
+                <h1>Доставка и оплата</h1>
+                <p>Мы аккуратно доставляем премиальную мебель STUL по Москве и Московской области. Ваша мебель приезжает в целости и сохранности.</p>
+            </div>
+        </section>
+
+        <section class="delivery-section">
+            <div class="delivery-grid">
+                <div class="delivery-text">
+                    <h2>Бесплатная доставка</h2>
+                    <p>При заказе от 500 000 ₽ доставка по Москве и Московской области осуществляется бесплатно. Мы ценим ваше время и доверие, поэтому делаем все возможное, чтобы процесс покупки был максимально комфортным.</p>
+                    <p>Доставка осуществляется в согласованное с вами время. Мы заранее свяжемся с вами для подтверждения деталей и уточнения удобного временного интервала.</p>
+                    <p>Вся мебель застрахована на время транспортировки. В случае повреждения вы получаете полную компенсацию или замену изделия.</p>
+                </div>
+                <div class="delivery-image">
+                    <img src="img/delivery_img/delivery-1.jpg" alt="Доставка мебели STUL">
+                </div>
+            </div>
+        </section>
+
+        <section class="features-grid" style="max-width: 1300px; margin: 0 auto; padding: 0 30px;">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <img src="img/delivery_img/icon-truck.svg" alt="Доставка">
+                </div>
+                <h3>Бесплатная доставка</h3>
+                <p>При заказе от 500 000 ₽ доставка бесплатная. В остальных случаях стоимость рассчитывается индивидуально.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <img src="img/delivery_img/icon-box.svg" alt="Сборка">
+                </div>
+                <h3>Сборка мебели</h3>
+                <p>Команда сборщиков аккуратно соберёт мебель на месте, вынесет упаковку и проверит каждый элемент.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <img src="img/delivery_img/icon-shield.svg" alt="Страхование">
+                </div>
+                <h3>Страхование</h3>
+                <p>Вся мебель застрахована на время транспортировки. В случае повреждения — полная компенсация.</p>
+            </div>
+        </section>
+
+        <section class="payment-section">
+            <div class="payment-container">
+                <h2>Способы оплаты</h2>
+                <p>Выберите удобный для вас вариант</p>
+                <div class="payment-grid">
+                    <div class="payment-card">
+                        <img src="img/delivery_img/payment-card.svg" alt="Банковская карта">
+                        <h3>Банковская карта</h3>
+                        <p>Оплата Visa, Mastercard, МИР на сайте или в шоуруме</p>
+                    </div>
+                    <div class="payment-card">
+                        <img src="img/delivery_img/payment-cash.svg" alt="Наличные">
+                        <h3>Наличные</h3>
+                        <p>Оплата наличными в шоуруме или курьеру при получении</p>
+                    </div>
+                    <div class="payment-card">
+                        <img src="img/delivery_img/payment-bill.svg" alt="Безналичный расчет">
+                        <h3>Безналичный расчет</h3>
+                        <p>Оплата по счету для физических и юридических лиц</p>
+                    </div>
+                    <div class="payment-card">
+                        <img src="img/delivery_img/payment-installment.svg" alt="Рассрочка">
+                        <h3>Рассрочка</h3>
+                        <p>Возможность оплаты частями без переплат</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="timeline-section">
+            <div class="timeline-container">
+                <h2>Как мы доставляем</h2>
+                <p>Простой и понятный процесс доставки вашей мебели</p>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-number">1</div>
+                        <div class="timeline-content">
+                            <h3>Оформление заказа</h3>
+                            <p>Вы выбираете понравившиеся позиции в каталоге и оформляете заказ на сайте или через менеджера.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-number">2</div>
+                        <div class="timeline-content">
+                            <h3>Подтверждение деталей</h3>
+                            <p>Менеджер связывается с вами для уточнения адреса, даты и времени доставки, а также особенностей подъема.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-number">3</div>
+                        <div class="timeline-content">
+                            <h3>Сборка и упаковка</h3>
+                            <p>Наши мастера тщательно упаковывают вашу мебель для безопасной транспортировки.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-number">4</div>
+                        <div class="timeline-content">
+                            <h3>Доставка</h3>
+                            <p>Курьерская служба доставляет мебель в согласованное время. Вы получаете SMS-уведомление о статусе.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-number">5</div>
+                        <div class="timeline-content">
+                            <h3>Сборка и установка</h3>
+                            <p>При необходимости наши сборщики собирают мебель, устанавливают ее и вывозят упаковку.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="info-section">
+            <div class="info-container">
+                <div class="info-box">
+                    <h3>Условия доставки</h3>
+                    <ul class="info-list">
+                        <li>
+                            <img src="img/delivery_img/check.svg" alt="✓">
+                            Доставка по Москве в пределах МКАД — 2 500 ₽
+                        </li>
+                        <li>
+                            <img src="img/delivery_img/check.svg" alt="✓">
+                            Доставка за МКАД до 30 км — 3 500 ₽ + 50 ₽/км
+                        </li>
+                        <li>
+                            <img src="img/delivery_img/check.svg" alt="✓">
+                            Доставка по Московской области — индивидуально
+                        </li>
+                        <li>
+                            <img src="img/delivery_img/check.svg" alt="✓">
+                            Подъем на лифте — бесплатно
+                        </li>
+                        <li>
+                            <img src="img/delivery_img/check.svg" alt="✓">
+                            Ручной подъем — от 300 ₽ за этаж
+                        </li>
+                        <li>
+                            <img src="img/delivery_img/check.svg" alt="✓">
+                            Сборка мебели — 10% от стоимости заказа
+                        </li>
+                    </ul>
+                </div>
+                <div class="info-box">
+                    <h3>Контакты</h3>
+                    <p style="margin-bottom: 20px; line-height: 1.7;">Наши менеджеры всегда готовы ответить на ваши вопросы и помочь с оформлением доставки.</p>
+                    <div class="contact-card">
+                        <p>
+                            <img src="img/footer_img/phone.svg" alt="Телефон">
+                            +7 (915) 401-57-54
+                        </p>
+                        <p>
+                            <img src="img/footer_img/email.svg" alt="Email">
+                            delivery@stul.ru
+                        </p>
+                        <p>
+                            <img src="img/footer_img/location.svg" alt="Адрес">
+                            г. Москва, ул. Большая Дмитровка, 20
+                        </p>
+                        <p style="margin-top: 15px; font-size: 13px; color: rgba(255,255,255,0.6);">
+                            Время работы: Пн–Пт 9:00–20:00, Сб–Вс 10:00–18:00
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="faq-section">
+            <h2>Часто задаваемые вопросы</h2>
+            <p>Ответы на самые популярные вопросы о доставке</p>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Как отслеживать статус доставки?</h3>
+                    <span>+</span>
+                </div>
+                <div class="faq-answer">
+                    После оформления заказа вы получите SMS с номером отслеживания. Также вы можете в любое время связаться с вашим персональным менеджером для уточнения статуса.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Можно ли изменить время доставки?</h3>
+                    <span>+</span>
+                </div>
+                <div class="faq-answer">
+                    Да, вы можете изменить время доставки, связавшись с менеджером не позднее чем за 24 часа до согласованной даты. Мы всегда идем навстречу нашим клиентам.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Что делать, если мебель повреждена?</h3>
+                    <span>+</span>
+                </div>
+                <div class="faq-answer">
+                    Вся наша мебель застрахована. В случае повреждения при транспортировке мы гарантируем полную компенсацию или замену изделия в кратчайшие сроки.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Нужно ли оплачивать сборку отдельно?</h3>
+                    <span>+</span>
+                </div>
+                <div class="faq-answer">
+                    Стоимость сборки составляет 10% от стоимости заказа и оплачивается отдельно. Вы можете отказаться от сборки и собрать мебель самостоятельно.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Работаете ли вы с юридическими лицами?</h3>
+                    <span>+</span>
+                </div>
+                <div class="faq-answer">
+                    Да, мы работаем с юридическими лицами по безналичному расчету. Предоставляем все необходимые документы: счет, договор, накладные.
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <div class="cta-container">
+                <h2>Остались вопросы?</h2>
+                <p>Наши менеджеры с радостью ответят на них и помогут с выбором</p>
+                <a href="catalog.html" class="cta-button">Перейти в каталог</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-top">
+                <div class="footer-logo">
+                    <img src="img/header_img/stud_logo.png" alt="STUL">
+                    <p>Премиальная мебель из дерева и натуральных материалов для вашего дома</p>
+                    <div class="social-links">
+                        <a href="#"><img src="img/footer_img/instagram.svg" alt="Instagram"></a>
+                        <a href="#"><img src="img/footer_img/facebook.svg" alt="Facebook"></a>
+                        <a href="#"><img src="img/footer_img/pinterest.svg" alt="Pinterest"></a>
+                        <a href="#"><img src="img/footer_img/youtube.svg" alt="YouTube"></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Каталог</h4>
+                    <ul>
+                        <li><a href="series.html?name=Blossom">Blossom</a></li>
+                        <li><a href="series.html?name=Madrid">Madrid</a></li>
+                        <li><a href="series.html?name=Hampton">Hampton</a></li>
+                        <li><a href="series.html?name=Charlton">Charlton</a></li>
+                        <li><a href="series.html?name=Symphony">Symphony</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Информация</h4>
+                    <ul>
+                        <li><a href="about.html">О нас</a></li>
+                        <li><a href="delivery.html">Доставка и оплата</a></li>
+                        <li><a href="#">Гарантия</a></li>
+                        <li><a href="#">Блог</a></li>
+                        <li><a href="#">Вакансии</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Контакты</h4>
+                    <div class="footer-contact">
+                        <p>
+                            <img src="img/footer_img/phone.svg" alt="Телефон">
+                            +7 (915) 401-57-54
+                        </p>
+                        <p>
+                            <img src="img/footer_img/email.svg" alt="Email">
+                            info@stul.ru
+                        </p>
+                        <p>
+                            <img src="img/footer_img/location.svg" alt="Адрес">
+                            г. Москва, ул. Большая Дмитровка, 20
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2024 STUL. Все права защищены</p>
+                <div class="footer-bottom-links">
+                    <a href="#">Политика конфиденциальности</a>
+                    <a href="#">Пользовательское соглашение</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Корзина</h3>
+            <span class="close-cart" onclick="closeCart()">&times;</span>
+        </div>
+        <div class="cart-items" id="cartItems"></div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Итого:</span>
+                <span id="cartTotal">0 ₽</span>
+            </div>
+            <button class="checkout-btn" onclick="checkout()">Оформить заказ</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const item = question.parentElement;
+                item.classList.toggle('active');
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const userIcon = document.querySelector('.user-icon');
+            if (userIcon) {
+                userIcon.style.pointerEvents = 'none';
+                userIcon.style.opacity = '0.5';
+                userIcon.title = 'Авторизация временно недоступна';
+            }
+        });
+    </script>
+</body>
+</html>

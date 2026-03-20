@@ -439,7 +439,7 @@
     <header>
         <div class="header-container">
             <div class="header-left">
-                <a href="index.html" class="logo-link">
+                <a href="index.php" class="logo-link">
                     <img class="logo_img" src="img/header_img/stud_logo.png" alt="STUL">
                 </a>
                 <nav class="menu">
@@ -880,14 +880,14 @@
             
             let seriesLink = '';
             if (product.series === 'Бестселлеры') {
-                seriesLink = `<a href="index.html#bestsellers">${product.series}</a>`;
+                seriesLink = `<a href="index.php#bestsellers">${product.series}</a>`;
             } else {
                 seriesLink = `<a href="series.html?name=${product.series}">${product.series}</a>`;
             }
             
             const html = `
                 <div class="breadcrumbs">
-                    <a href="index.html">Главная</a> / 
+                    <a href="index.php">Главная</a> /
                     <a href="catalog.html">Каталог</a> / 
                     ${seriesLink} / 
                     <span>${product.name}</span>

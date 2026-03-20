@@ -1,0 +1,1177 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STUL - Карточка товара</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .product-page {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px;
+        }
+
+        .breadcrumbs {
+            margin-bottom: 40px;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .breadcrumbs a {
+            color: #666;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .breadcrumbs a:hover {
+            color: #000;
+        }
+
+        .product-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 80px;
+        }
+
+        .product-gallery {
+            position: relative;
+        }
+
+        .main-image-container {
+            background: #f8f8f8;
+            padding: 40px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 20px;
+        }
+
+        .main-image {
+            max-width: 100%;
+            max-height: 450px;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .thumbnail-gallery {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .thumbnail-item {
+            background: #f8f8f8;
+            padding: 10px;
+            cursor: pointer;
+            opacity: 0.6;
+            transition: opacity 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+        }
+
+        .thumbnail-item:hover,
+        .thumbnail-item.active {
+            opacity: 1;
+        }
+
+        .thumbnail-item img {
+            max-width: 100%;
+            max-height: 70px;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .product-info {
+            padding: 20px 0;
+        }
+
+        .product-info h1 {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+
+        .product-info .price {
+            font-size: 36px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .product-info .badge {
+            display: inline-block;
+            background: #e9eae5;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .product-description {
+            margin: 30px 0;
+            line-height: 1.8;
+            color: #444;
+        }
+
+        .product-actions {
+            display: flex;
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .add-to-cart {
+            flex: 2;
+            background: #000;
+            color: #fff;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 40px;
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .add-to-cart:hover {
+            background: #333;
+            transform: scale(1.02);
+        }
+
+        .add-to-favorites {
+            flex: 1;
+            background: #fff;
+            border: 2px solid #000;
+            color: #000;
+            padding: 15px;
+            border-radius: 40px;
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .add-to-favorites:hover {
+            background: #000;
+            color: #fff;
+        }
+
+        .add-to-favorites.active {
+            background: #000;
+            color: #fff;
+        }
+
+        .product-specs {
+            margin-top: 40px;
+            border-top: 1px solid #ddd;
+            padding-top: 40px;
+        }
+
+        .product-specs h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .specs-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .spec-item {
+            display: flex;
+            gap: 10px;
+        }
+
+        .spec-label {
+            font-weight: 600;
+            min-width: 100px;
+        }
+
+        .spec-value {
+            color: #666;
+        }
+
+        .related-products {
+            margin-top: 80px;
+        }
+
+        .related-products h2 {
+            font-size: 36px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+
+        .notification {
+            position: fixed;
+            top: 100px;
+            right: 40px;
+            background: #000;
+            color: #fff;
+            padding: 15px 30px;
+            border-radius: 40px;
+            z-index: 2000;
+            transform: translateX(400px);
+            transition: transform 0.3s;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 380px;
+            height: 100vh;
+            background: #fff;
+            box-shadow: -5px 0 20px rgba(0,0,0,0.1);
+            z-index: 3000;
+            transition: right 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cart-sidebar.open {
+            right: 0;
+        }
+
+        .cart-header {
+            padding: 25px;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cart-header h3 {
+            font-size: 18px;
+        }
+
+        .close-cart {
+            font-size: 28px;
+            cursor: pointer;
+            color: #999;
+            transition: color 0.3s;
+        }
+
+        .close-cart:hover {
+            color: #f00;
+        }
+
+        .cart-items {
+            flex: 1;
+            overflow-y: auto;
+            padding: 25px;
+        }
+
+        .cart-item {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+            position: relative;
+        }
+
+        .cart-item img {
+            width: 70px;
+            height: 70px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .cart-item-info {
+            flex: 1;
+        }
+
+        .cart-item-info h4 {
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .cart-item-price {
+            font-weight: 600;
+            color: #000;
+            font-size: 14px;
+        }
+
+        .cart-item-remove {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: none;
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+            color: #999;
+            transition: color 0.3s;
+        }
+
+        .cart-item-remove:hover {
+            color: #f00;
+        }
+
+        .cart-footer {
+            padding: 25px;
+            border-top: 1px solid #ddd;
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            background: #000;
+            color: #fff;
+            border: none;
+            padding: 12px;
+            border-radius: 40px;
+            font-family: 'Playfair Display', serif;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .checkout-btn:hover {
+            background: #333;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #000;
+            color: #fff;
+            font-size: 10px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .basket-icon {
+            position: relative;
+            cursor: pointer;
+        }
+
+        @media (max-width: 1200px) {
+            .related-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 992px) {
+            .product-container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .related-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .product-page {
+                padding: 20px;
+            }
+            
+            .product-info h1 {
+                font-size: 36px;
+            }
+            
+            .product-info .price {
+                font-size: 28px;
+            }
+            
+            .product-actions {
+                flex-direction: column;
+            }
+            
+            .related-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cart-sidebar {
+                width: 100%;
+                right: -100%;
+            }
+            
+            .specs-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="header-left">
+                <a href="index.html" class="logo-link">
+                    <img class="logo_img" src="img/header_img/stud_logo.png" alt="STUL">
+                </a>
+                <nav class="menu">
+                    <a href="catalog.html">Каталог</a>
+                    <a href="delivery.html">Доставка</a>
+                    <a href="about.html">О нас</a>
+                </nav>
+            </div>
+            <div class="header-right">
+                <div class="search-container">
+                    <input type="text" class="search-input" placeholder="Поиск">
+                    <img src="img/header_img/search_logo.png" alt="Поиск" class="search-icon">
+                </div>
+                <div class="icon-group">
+                    <img src="img/header_img/user_logo.png" alt="Войти" class="header-icon user-icon">
+                    <img src="img/header_img/favorite_logo.png" alt="Избранное" class="header-icon favorites-icon">
+                    <div class="basket-icon" id="cartIcon">
+                        <img src="img/header_img/backet_logo.png" alt="Корзина">
+                        <span class="cart-count" id="cartCount">0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="product-page" id="productPage"></main>
+
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Корзина</h3>
+            <span class="close-cart" onclick="closeCart()">&times;</span>
+        </div>
+        <div class="cart-items" id="cartItems"></div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Итого:</span>
+                <span id="cartTotal">0 ₽</span>
+            </div>
+            <button class="checkout-btn" onclick="checkout()">Оформить заказ</button>
+        </div>
+    </div>
+
+    <div class="auth-modal" id="authModal">
+        <div class="auth-modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>Авторизация / Регистрация</h2>
+            <form id="authForm">
+                <input type="text" placeholder="Имя" required>
+                <input type="tel" placeholder="Телефон" required>
+                <input type="email" placeholder="Email" required>
+                <input type="password" placeholder="Пароль" required>
+                <div class="form-buttons">
+                    <button type="submit" class="register-btn">Зарегистрироваться</button>
+                    <button type="button" class="login-btn">Войти</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+        const productsData = {
+            // Серия Blossom
+            'blossom6': {
+                id: 'blossom6',
+                name: 'Blossom 6',
+                series: 'Blossom',
+                price: 790070,
+                mainImage: 'img/products/blossom/blossom6/blossom6.webp',
+                images: [
+                    'img/products/blossom/blossom6/blossom6.webp',
+                    'img/products/blossom/blossom6/blossom6.2.webp',
+                    'img/products/blossom/blossom6/blossom6.3.webp',
+                    'img/products/blossom/blossom6/blossom6.4.webp'
+                ],
+                badge: 'Популярное',
+                description: 'Элегантный комплект садовой мебели Blossom 6 создан для тех, кто ценит комфорт и стиль. Идеально подходит для просторных террас и патио.',
+                specs: {
+                    material: 'Алюминий, плетение Rope',
+                    color: 'Тёплый коричневый',
+                    dimensions: '200 x 80 x 70 см',
+                    weight: '25 кг',
+                    country: 'Италия',
+                    warranty: '5 лет'
+                }
+            },
+            'blossom8': {
+                id: 'blossom8',
+                name: 'Blossom 8',
+                series: 'Blossom',
+                price: 980210,
+                mainImage: 'img/products/blossom/blossom8/blossom8.webp',
+                images: [
+                    'img/products/blossom/blossom8/blossom8.webp',
+                    'img/products/blossom/blossom8/blossom8.2.webp',
+                    'img/products/blossom/blossom8/blossom8.3.webp',
+                    'img/products/blossom/blossom8/blossom8.4.webp'
+                ],
+                badge: 'Новинка',
+                description: 'Увеличенная версия комплекта Blossom для большой компании. Восемь предметов мебели создают идеальное пространство для приема гостей.',
+                specs: {
+                    material: 'Алюминий, плетение Rope',
+                    color: 'Светлый беж',
+                    dimensions: '280 x 90 x 75 см',
+                    weight: '32 кг',
+                    country: 'Италия',
+                    warranty: '5 лет'
+                }
+            },
+            'blossom-sofa': {
+                id: 'blossom-sofa',
+                name: 'Blossom Sofa',
+                series: 'Blossom',
+                price: 450000,
+                mainImage: 'img/products/blossom/sofa/sofa.webp',
+                images: [
+                    'img/products/blossom/sofa/sofa.webp',
+                    'img/products/blossom/sofa/sofa.2.webp',
+                    'img/products/blossom/sofa/sofa.3.webp',
+                    'img/products/blossom/sofa/sofa.4.webp'
+                ],
+                badge: '',
+                description: 'Удобный диван из серии Blossom. Идеально подходит для создания зоны отдыха на террасе.',
+                specs: {
+                    material: 'Алюминий, плетение Rope',
+                    color: 'Бежевый',
+                    dimensions: '180 x 85 x 70 см',
+                    weight: '28 кг',
+                    country: 'Италия',
+                    warranty: '5 лет'
+                }
+            },
+            'blossom-chair': {
+                id: 'blossom-chair',
+                name: 'Blossom Chair',
+                series: 'Blossom',
+                price: 120000,
+                mainImage: 'img/products/blossom/chair/chair.webp',
+                images: [
+                    'img/products/blossom/chair/chair.webp',
+                    'img/products/blossom/chair/chair.2.webp',
+                    'img/products/blossom/chair/chair.3.webp',
+                    'img/products/blossom/chair/chair.4.webp'
+                ],
+                badge: '',
+                description: 'Элегантное кресло из серии Blossom. Легкое и удобное, идеально для отдыха на свежем воздухе.',
+                specs: {
+                    material: 'Алюминий, плетение Rope',
+                    color: 'Бежевый',
+                    dimensions: '70 x 75 x 70 см',
+                    weight: '8 кг',
+                    country: 'Италия',
+                    warranty: '5 лет'
+                }
+            },
+            'blossom-table': {
+                id: 'blossom-table',
+                name: 'Blossom Table',
+                series: 'Blossom',
+                price: 350000,
+                mainImage: 'img/products/blossom/table/table.webp',
+                images: [
+                    'img/products/blossom/table/table.webp',
+                    'img/products/blossom/table/table.2.webp',
+                    'img/products/blossom/table/table.3.webp',
+                    'img/products/blossom/table/table.4.webp'
+                ],
+                badge: 'Хит',
+                description: 'Просторный стол из серии Blossom. Идеально подходит для обедов на открытом воздухе.',
+                specs: {
+                    material: 'Алюминий, стекло',
+                    color: 'Прозрачный',
+                    dimensions: '200 x 100 x 75 см',
+                    weight: '35 кг',
+                    country: 'Италия',
+                    warranty: '5 лет'
+                }
+            },
+            'blossom-lounge': {
+                id: 'blossom-lounge',
+                name: 'Blossom Lounge',
+                series: 'Blossom',
+                price: 680000,
+                mainImage: 'img/products/blossom/lounge/lounge.webp',
+                images: [
+                    'img/products/blossom/lounge/lounge.webp',
+                    'img/products/blossom/lounge/lounge.2.webp',
+                    'img/products/blossom/lounge/lounge.3.webp',
+                    'img/products/blossom/lounge/lounge.4.webp'
+                ],
+                badge: '',
+                description: 'Комфортное кресло для отдыха из серии Blossom. Идеально для релаксации на свежем воздухе.',
+                specs: {
+                    material: 'Алюминий, плетение Rope',
+                    color: 'Коричневый',
+                    dimensions: '80 x 90 x 100 см',
+                    weight: '15 кг',
+                    country: 'Италия',
+                    warranty: '5 лет'
+                }
+            },
+            
+            // Серия Madrid
+            'madrid1': {
+                id: 'madrid1',
+                name: 'Madrid 1',
+                series: 'Madrid',
+                price: 910760,
+                mainImage: 'img/products/madrid/madrid1/madrid1.webp',
+                images: [
+                    'img/products/madrid/madrid1/madrid1.webp',
+                    'img/products/madrid/madrid1/madrid1.2.webp',
+                    'img/products/madrid/madrid1/madrid1.3.webp',
+                    'img/products/madrid/madrid1/madrid1.4.webp'
+                ],
+                badge: 'Популярное',
+                description: 'Классический испанский стиль. Мебель из массива дерева с коваными элементами.',
+                specs: {
+                    material: 'Массив дуба, ковка',
+                    color: 'Тёмный орех',
+                    dimensions: '220 x 85 x 75 см',
+                    weight: '45 кг',
+                    country: 'Испания',
+                    warranty: '10 лет'
+                }
+            },
+            'madrid2': {
+                id: 'madrid2',
+                name: 'Madrid 2',
+                series: 'Madrid',
+                price: 890000,
+                mainImage: 'img/products/madrid/madrid2/madrid2.webp',
+                images: [
+                    'img/products/madrid/madrid2/madrid2.webp',
+                    'img/products/madrid/madrid2/madrid2.2.webp',
+                    'img/products/madrid/madrid2/madrid2.3.webp',
+                    'img/products/madrid/madrid2/madrid2.4.webp'
+                ],
+                badge: '',
+                description: 'Элегантный комплект мебели в испанском стиле. Прекрасно подходит для загородного дома.',
+                specs: {
+                    material: 'Массив дуба',
+                    color: 'Коричневый',
+                    dimensions: '200 x 80 x 75 см',
+                    weight: '40 кг',
+                    country: 'Испания',
+                    warranty: '10 лет'
+                }
+            },
+            'madrid3': {
+                id: 'madrid3',
+                name: 'Madrid 3',
+                series: 'Madrid',
+                price: 750000,
+                mainImage: 'img/products/madrid/madrid3/madrid3.webp',
+                images: [
+                    'img/products/madrid/madrid3/madrid3.webp',
+                    'img/products/madrid/madrid3/madrid3.2.webp',
+                    'img/products/madrid/madrid3/madrid3.3.webp',
+                    'img/products/madrid/madrid3/madrid3.4.webp'
+                ],
+                badge: 'Новинка',
+                description: 'Компактный комплект мебели для небольших террас. Испанский шарм в каждой детали.',
+                specs: {
+                    material: 'Массив дуба',
+                    color: 'Светлый дуб',
+                    dimensions: '180 x 75 x 75 см',
+                    weight: '35 кг',
+                    country: 'Испания',
+                    warranty: '10 лет'
+                }
+            },
+            'madrid4': {
+                id: 'madrid4',
+                name: 'Madrid 4',
+                series: 'Madrid',
+                price: 1200000,
+                mainImage: 'img/products/madrid/madrid4/madrid4.webp',
+                images: [
+                    'img/products/madrid/madrid4/madrid4.webp',
+                    'img/products/madrid/madrid4/madrid4.2.webp',
+                    'img/products/madrid/madrid4/madrid4.3.webp',
+                    'img/products/madrid/madrid4/madrid4.4.webp'
+                ],
+                badge: 'Премиум',
+                description: 'Роскошный комплект мебели премиум-класса. Ручная работа, эксклюзивный дизайн.',
+                specs: {
+                    material: 'Массив дуба, латунь',
+                    color: 'Венге',
+                    dimensions: '240 x 90 x 80 см',
+                    weight: '55 кг',
+                    country: 'Испания',
+                    warranty: '15 лет'
+                }
+            },
+            
+            // Серия Hampton
+            'hampton1': {
+                id: 'hampton1',
+                name: 'Hampton 1',
+                series: 'Hampton',
+                price: 910340,
+                mainImage: 'img/products/hampton/hampton1/hampton1.webp',
+                images: [
+                    'img/products/hampton/hampton1/hampton1.webp',
+                    'img/products/hampton/hampton1/hampton1.2.webp',
+                    'img/products/hampton/hampton1/hampton1.3.webp',
+                    'img/products/hampton/hampton1/hampton1.4.webp'
+                ],
+                badge: 'Популярное',
+                description: 'Американская классика. Удобная и практичная мебель для загородного дома.',
+                specs: {
+                    material: 'Массив дуба',
+                    color: 'Орех',
+                    dimensions: '210 x 85 x 75 см',
+                    weight: '42 кг',
+                    country: 'США',
+                    warranty: '10 лет'
+                }
+            },
+            'hampton2': {
+                id: 'hampton2',
+                name: 'Hampton 2',
+                series: 'Hampton',
+                price: 820000,
+                mainImage: 'img/products/hampton/hampton2/hampton2.webp',
+                images: [
+                    'img/products/hampton/hampton2/hampton2.webp',
+                    'img/products/hampton/hampton2/hampton2.2.webp',
+                    'img/products/hampton/hampton2/hampton2.3.webp',
+                    'img/products/hampton/hampton2/hampton2.4.webp'
+                ],
+                badge: '',
+                description: 'Элегантный комплект мебели в американском стиле. Комфорт и функциональность.',
+                specs: {
+                    material: 'Массив дуба',
+                    color: 'Коричневый',
+                    dimensions: '190 x 80 x 75 см',
+                    weight: '38 кг',
+                    country: 'США',
+                    warranty: '10 лет'
+                }
+            },
+            'hampton3': {
+                id: 'hampton3',
+                name: 'Hampton 3',
+                series: 'Hampton',
+                price: 950000,
+                mainImage: 'img/products/hampton/hampton3/hampton3.webp',
+                images: [
+                    'img/products/hampton/hampton3/hampton3.webp',
+                    'img/products/hampton/hampton3/hampton3.2.webp',
+                    'img/products/hampton/hampton3/hampton3.3.webp',
+                    'img/products/hampton/hampton3/hampton3.4.webp'
+                ],
+                badge: 'Новинка',
+                description: 'Современная интерпретация американской классики. Стильный дизайн и комфорт.',
+                specs: {
+                    material: 'Массив дуба',
+                    color: 'Серый',
+                    dimensions: '200 x 85 x 78 см',
+                    weight: '40 кг',
+                    country: 'США',
+                    warranty: '10 лет'
+                }
+            },
+            'hampton4': {
+                id: 'hampton4',
+                name: 'Hampton 4',
+                series: 'Hampton',
+                price: 680000,
+                mainImage: 'img/products/hampton/hampton4/hampton4.webp',
+                images: [
+                    'img/products/hampton/hampton4/hampton4.webp',
+                    'img/products/hampton/hampton4/hampton4.2.webp',
+                    'img/products/hampton/hampton4/hampton4.3.webp',
+                    'img/products/hampton/hampton4/hampton4.4.webp'
+                ],
+                badge: '',
+                description: 'Компактный комплект мебели для небольших пространств. Американский стиль в каждой детали.',
+                specs: {
+                    material: 'Массив дуба',
+                    color: 'Бежевый',
+                    dimensions: '170 x 75 x 75 см',
+                    weight: '32 кг',
+                    country: 'США',
+                    warranty: '10 лет'
+                }
+            },
+            'hampton5': {
+                id: 'hampton5',
+                name: 'Hampton 5',
+                series: 'Hampton',
+                price: 1100000,
+                mainImage: 'img/products/hampton/hampton5/hampton5.webp',
+                images: [
+                    'img/products/hampton/hampton5/hampton5.webp',
+                    'img/products/hampton/hampton5/hampton5.2.webp',
+                    'img/products/hampton/hampton5/hampton5.3.webp',
+                    'img/products/hampton/hampton5/hampton5.4.webp'
+                ],
+                badge: 'Хит',
+                description: 'Просторный комплект мебели для большой семьи. Максимальный комфорт и стиль.',
+                specs: {
+                    material: 'Массив дуба',
+                    color: 'Венге',
+                    dimensions: '250 x 90 x 80 см',
+                    weight: '50 кг',
+                    country: 'США',
+                    warranty: '12 лет'
+                }
+            }
+        };
+
+        function getProductId() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('id');
+        }
+
+        function displayProduct() {
+            const productId = getProductId();
+            
+            if (!productId || !productsData[productId]) {
+                document.getElementById('productPage').innerHTML = `
+                    <div style="text-align: center; padding: 100px 20px;">
+                        <h2>Товар не найден</h2>
+                        <p style="margin: 20px 0;">К сожалению, запрошенный товар отсутствует.</p>
+                        <a href="catalog.html" class="hits-btn" style="display: inline-block; background: #000; color: #fff; padding: 12px 35px; border-radius: 40px; text-decoration: none;">Вернуться в каталог</a>
+                    </div>
+                `;
+                return;
+            }
+
+            const product = productsData[productId];
+            const isFavorite = favorites.some(fav => fav.id === product.id);
+            
+            let seriesLink = '';
+            if (product.series === 'Бестселлеры') {
+                seriesLink = `<a href="index.html#bestsellers">${product.series}</a>`;
+            } else {
+                seriesLink = `<a href="series.html?name=${product.series}">${product.series}</a>`;
+            }
+            
+            const html = `
+                <div class="breadcrumbs">
+                    <a href="index.html">Главная</a> / 
+                    <a href="catalog.html">Каталог</a> / 
+                    ${seriesLink} / 
+                    <span>${product.name}</span>
+                </div>
+
+                <div class="product-container">
+                    <div class="product-gallery">
+                        <div class="main-image-container">
+                            <img src="${product.mainImage}" alt="${product.name}" class="main-image" id="mainImage">
+                        </div>
+                        <div class="thumbnail-gallery">
+                            ${product.images.map((img, index) => `
+                                <div class="thumbnail-item ${index === 0 ? 'active' : ''}" onclick="changeImage('${img}')">
+                                    <img src="${img}" alt="${product.name} вид ${index + 1}">
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+
+                    <div class="product-info">
+                        ${product.badge ? `<span class="badge">${product.badge}</span>` : ''}
+                        <h1>${product.name}</h1>
+                        <div class="price">${product.price.toLocaleString()} ₽</div>
+                        
+                        <div class="product-description">
+                            <p>${product.description}</p>
+                        </div>
+
+                        <div class="product-actions">
+                            <button class="add-to-cart" onclick="addToCart({
+                                id: '${product.id}',
+                                name: '${product.name}',
+                                price: ${product.price},
+                                image: '${product.mainImage}'
+                            })">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                    <path d="M7 18C5.9 18 5.01 18.9 5.01 20C5.01 21.1 5.9 22 7 22C8.1 22 9 21.1 9 20C9 18.9 8.1 18 7 18ZM1 2V4H3L6.6 11.59L5.25 14.04C5.09 14.32 5 14.65 5 15C5 16.1 5.9 17 7 17H19V15H7.42C7.28 15 7.17 14.89 7.17 14.75L7.2 14.63L8.1 13H15.55C16.3 13 16.96 12.59 17.3 11.97L20.88 5.48C20.96 5.34 21 5.17 21 5C21 4.45 20.55 4 20 4H5.21L4.27 2H1ZM17 18C15.9 18 15.01 18.9 15.01 20C15.01 21.1 15.9 22 17 22C18.1 22 19 21.1 19 20C19 18.9 18.1 18 17 18Z" fill="currentColor"/>
+                                </svg>
+                                В корзину
+                            </button>
+                            <button class="add-to-favorites ${isFavorite ? 'active' : ''}" id="favoriteBtn" onclick="toggleFavorite({
+                                id: '${product.id}',
+                                name: '${product.name}',
+                                price: ${product.price},
+                                image: '${product.mainImage}'
+                            })">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                    <path d="M12 21.35L10.55 20.03C5.4 15.36 2 12.28 2 8.5C2 5.42 4.42 3 7.5 3C9.24 3 10.91 3.81 12 5.09C13.09 3.81 14.76 3 16.5 3C19.58 3 22 5.42 22 8.5C22 12.28 18.6 15.36 13.45 20.04L12 21.35Z" fill="currentColor"/>
+                                </svg>
+                                В избранное
+                            </button>
+                        </div>
+
+                        <div class="product-specs">
+                            <h3>Характеристики</h3>
+                            <div class="specs-grid">
+                                <div class="spec-item">
+                                    <span class="spec-label">Материал:</span>
+                                    <span class="spec-value">${product.specs.material}</span>
+                                </div>
+                                <div class="spec-item">
+                                    <span class="spec-label">Цвет:</span>
+                                    <span class="spec-value">${product.specs.color}</span>
+                                </div>
+                                <div class="spec-item">
+                                    <span class="spec-label">Размеры:</span>
+                                    <span class="spec-value">${product.specs.dimensions}</span>
+                                </div>
+                                <div class="spec-item">
+                                    <span class="spec-label">Вес:</span>
+                                    <span class="spec-value">${product.specs.weight}</span>
+                                </div>
+                                <div class="spec-item">
+                                    <span class="spec-label">Страна:</span>
+                                    <span class="spec-value">${product.specs.country}</span>
+                                </div>
+                                <div class="spec-item">
+                                    <span class="spec-label">Гарантия:</span>
+                                    <span class="spec-value">${product.specs.warranty}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="related-products">
+                    <h2>Вам также может понравиться</h2>
+                    <div class="related-grid">
+                        <div class="product-card" onclick="location.href='product.html?id=blossom8'">
+                            <img src="img/products/blossom/blossom8/blossom8.webp" alt="Blossom 8">
+                            <h3>Blossom 8</h3>
+                            <p class="price">980 210 ₽</p>
+                        </div>
+                        <div class="product-card" onclick="location.href='product.html?id=madrid1'">
+                            <img src="img/products/madrid/madrid1/madrid1.webp" alt="Madrid 1">
+                            <h3>Madrid 1</h3>
+                            <p class="price">910 760 ₽</p>
+                        </div>
+                        <div class="product-card" onclick="location.href='product.html?id=hampton1'">
+                            <img src="img/products/hampton/hampton1/hampton1.webp" alt="Hampton 1">
+                            <h3>Hampton 1</h3>
+                            <p class="price">910 340 ₽</p>
+                        </div>
+                        <div class="product-card" onclick="location.href='product.html?id=charlton1'">
+                            <img src="img/products/charlton/charlton1/charlton1.webp" alt="Charlton 1">
+                            <h3>Charlton 1</h3>
+                            <p class="price">890 120 ₽</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('productPage').innerHTML = html;
+        }
+
+        window.changeImage = function(src) {
+            document.getElementById('mainImage').src = src;
+            document.querySelectorAll('.thumbnail-item').forEach(item => {
+                item.classList.remove('active');
+                if (item.querySelector('img').src === src) {
+                    item.classList.add('active');
+                }
+            });
+        };
+
+        window.toggleFavorite = function(product) {
+            const index = favorites.findIndex(fav => fav.id === product.id);
+            
+            if (index === -1) {
+                favorites.push(product);
+                document.getElementById('favoriteBtn')?.classList.add('active');
+                showNotification('Добавлено в избранное');
+            } else {
+                favorites.splice(index, 1);
+                document.getElementById('favoriteBtn')?.classList.remove('active');
+                showNotification('Удалено из избранного');
+            }
+            
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+        };
+
+        window.addToCart = function(product) {
+            const existingItem = cart.find(item => item.id === product.id);
+            
+            if (existingItem) {
+                existingItem.quantity = (existingItem.quantity || 1) + 1;
+            } else {
+                cart.push({...product, quantity: 1});
+            }
+            
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+            updateCartDisplay();
+            showNotification('Товар добавлен в корзину');
+            openCart();
+        };
+
+        window.removeFromCart = function(productId) {
+            cart = cart.filter(item => item.id !== productId);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+            updateCartDisplay();
+            showNotification('Товар удален из корзины');
+        };
+
+        window.updateCartCount = function() {
+            const cartCount = document.getElementById('cartCount');
+            if (cartCount) {
+                const count = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+                cartCount.textContent = count;
+            }
+        };
+
+        window.updateCartDisplay = function() {
+            const cartItems = document.getElementById('cartItems');
+            const cartTotal = document.getElementById('cartTotal');
+            
+            if (!cartItems || !cartTotal) return;
+            
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<p style="text-align: center; color: #999; padding: 20px;">Корзина пуста</p>';
+                cartTotal.textContent = '0 ₽';
+                return;
+            }
+            
+            let html = '';
+            let total = 0;
+            
+            cart.forEach(item => {
+                const itemTotal = item.price * (item.quantity || 1);
+                total += itemTotal;
+                
+                html += `
+                    <div class="cart-item">
+                        <img src="${item.image}" alt="${item.name}">
+                        <div class="cart-item-info">
+                            <h4>${item.name}</h4>
+                            <div class="cart-item-price">${item.price.toLocaleString()} ₽</div>
+                            <div style="font-size: 12px; color: #666;">Количество: ${item.quantity || 1}</div>
+                        </div>
+                        <button class="cart-item-remove" onclick="removeFromCart('${item.id}')">&times;</button>
+                    </div>
+                `;
+            });
+            
+            cartItems.innerHTML = html;
+            cartTotal.textContent = total.toLocaleString() + ' ₽';
+        };
+
+        window.openCart = function() {
+            const cartSidebar = document.getElementById('cartSidebar');
+            if (cartSidebar) {
+                cartSidebar.classList.add('open');
+            }
+        };
+
+        window.closeCart = function() {
+            const cartSidebar = document.getElementById('cartSidebar');
+            if (cartSidebar) {
+                cartSidebar.classList.remove('open');
+            }
+        };
+
+        window.showNotification = function(message) {
+            const notification = document.createElement('div');
+            notification.className = 'notification show';
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 2000);
+        };
+
+        window.checkout = function() {
+            alert('Функция оформления заказа будет доступна в ближайшее время');
+        };
+
+        document.addEventListener('DOMContentLoaded', function() {
+            displayProduct();
+            updateCartCount();
+            updateCartDisplay();
+
+            const userIcon = document.querySelector('.user-icon');
+            const authModal = document.getElementById('authModal');
+            const closeBtn = document.querySelector('.close-btn');
+            const cartIcon = document.getElementById('cartIcon');
+            const favoritesIcon = document.querySelector('.favorites-icon');
+
+            if (userIcon) {
+                userIcon.addEventListener('click', function() {
+                    authModal.style.display = 'flex';
+                });
+            }
+
+            if (closeBtn) {
+                closeBtn.addEventListener('click', function() {
+                    authModal.style.display = 'none';
+                });
+            }
+
+            if (cartIcon) {
+                cartIcon.addEventListener('click', openCart);
+            }
+
+            if (favoritesIcon) {
+                favoritesIcon.addEventListener('click', function() {
+                    window.location.href = 'favorites.html';
+                });
+            }
+
+            window.addEventListener('click', function(e) {
+                if (e.target === authModal) {
+                    authModal.style.display = 'none';
+                }
+            });
+
+            document.querySelectorAll('.register-btn, .login-btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    showNotification('Функция будет доступна в ближайшее время');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

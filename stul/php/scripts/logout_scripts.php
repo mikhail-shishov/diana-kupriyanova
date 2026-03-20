@@ -7,7 +7,7 @@ $_SESSION = [];
 session_destroy();
 
 
-$_SESSION['message'] = 'Вы успешно вышли'
+$_SESSION['message'] = 'Вы успешно вышли';
 
         header("Location: ../login.php");
         exit();
