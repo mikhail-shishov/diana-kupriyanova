@@ -2,7 +2,7 @@
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-require_once 'db.php';
+require_once __DIR__ . '/../db/db.php';
 
 class User {
     private $pdo;
@@ -13,9 +13,9 @@ class User {
 
     public function register($email, $password, $first_name, $last_name, $tel) {
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-        $sql = "INSERT INTO users (email, password, first_name, last_name, tel) VALUES (:email, :password, :first_name, :last_name. :tel)";
+        $sql = "INSERT INTO users (email, password, first_name, last_name, tel) VALUES (:email, :password, :first_name, :last_name, :tel)";
         $stmt = $this->pdo->prepare($sql);
-        $stmt->execute([
+        return $stmt->execute([
             'email' => $email,
             'password' => $hashed_password,
             'first_name' => $first_name,
@@ -35,6 +35,13 @@ class User {
         } else {
             return false;
         }
+    }
+
+    public function getById($id) {
+        $sql = "SELECT * FROM users WHERE id = :id";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute(['id' => $id]);
+        return $stmt->fetch();
     }
 }
 
